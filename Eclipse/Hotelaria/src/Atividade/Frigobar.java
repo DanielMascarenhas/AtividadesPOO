@@ -7,11 +7,11 @@ public class Frigobar {
 	
 	List<Iten> itens = new ArrayList<>();
 	double registroConsumo;
-	int quantidade;
+	int quantidadeItens;
 	
-	public Frigobar(double registroConsumo, int quantidade) {
-		this.registroConsumo = registroConsumo;
-		this.quantidade = quantidade;
+	public Frigobar() {
+		this.registroConsumo = 0;
+		this.quantidadeItens = 0;
 	}
 	
 	public void listarItens() {

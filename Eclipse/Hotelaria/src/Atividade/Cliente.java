@@ -7,6 +7,7 @@ public class Cliente extends Pessoa {
 	public Cliente(String nome, String cpf, String cartão) {
 		super(nome, cpf);
 		this.cartão = cartão;
+		fatura = 0;
 	}
 	
 	

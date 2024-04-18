@@ -9,7 +9,7 @@ public class Serviço {
 		this.custo = custo;
 	}
 
-	public void executarServiço() {
-		
+	public double executarServiço() {
+		return custo;
 	}
 }
