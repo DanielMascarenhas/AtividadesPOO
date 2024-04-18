@@ -11,8 +11,14 @@ public class Main {
 		hotel.adicionarCliente(cliente1);
 		hotel.adicionarFuncionario(funcionario1);
 		
+		Iten iten1 = new Iten("Banana", 20.0);
+		
 		Frigobar frigobar1 = new Frigobar();
+		
 		Categoria categoria1 = new Categoria("Luxo", 2000.0, frigobar1);
+		
+		frigobar1.adicionrIten(iten1);
+		
 		Quarto quarto1 = new Quarto( "001", funcionario1, categoria1);
 		
 		
@@ -22,7 +28,13 @@ public class Main {
 		
 		Serviço serviço1 = new Serviço("Massagem", 200.0);
 		
-		quarto1.serviço(serviço1);
+		quarto1.serviço(serviço1, cliente1);
+		
+		quarto1.diaria(cliente1);
+		
+		categoria1.frigobar.listarItens();
+		categoria1.frigobar.consumirIten("Banana");
+		
 		
 		quarto1.fecharQuarto();
 		

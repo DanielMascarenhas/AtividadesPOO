@@ -8,8 +8,8 @@ public class Hotel {
 	String nome;
 	List<Quarto> quartos = new ArrayList<>();
 	List<Cliente> clientes = new ArrayList<>();
-	List<Hospede> hospedes = new ArrayList<>();
 	List<Funcionario> funcionarios = new ArrayList<>();
+	List<Serviço> serviços = new ArrayList<>();
 	
 	public Hotel(String nome) {
 		this.nome = nome;
@@ -21,6 +21,10 @@ public class Hotel {
 
 	public void adicionarFuncionario(Funcionario funcionario) {
 		funcionarios.add(funcionario);
+	}
+	
+	public void adicionarServiços(Serviço serviço) {
+		serviços.add(serviço);
 	}
 
 	public void alugarQuarto() {
