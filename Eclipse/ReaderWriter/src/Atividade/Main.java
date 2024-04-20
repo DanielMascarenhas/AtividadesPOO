@@ -21,34 +21,29 @@ public class Main {
 		
 		Pessoa p1 = new Pessoa("Daniel Mascarenhas", "234.567.833-08", 24);
 		
-		
 		while(true) {
+			linha = bufferedReader.readLine();
 			if(linha == null) {
-				linha = bufferedReader.readLine();
+				
 				bufferedWriter.write(p1.nome+ ", " +p1.cpf+ ", " +p1.idade + "\n" );		
 				break;
 			}
 			
 		}
+		bufferedReader.close();
 		
 		linha = "1";
-		
-		
 		
 		//FileReader fileReader = new FileReader(path); 
 		//BufferedReader bufferedReader = new BufferedReader(fileReader); 
 		
-		while (linha != null){
-			linha = bufferedReader.readLine();
-			if(linha != null){
-				System.out.print(linha + "\n");
-			}
-			
-			bufferedReader.close();
+		while ( (linha = bufferedReader.readLine() ) != null){
+			System.out.print(linha + "\n");
 			
 		}
 		
 		bufferedReader.close();
+		bufferedWriter.close();
 
 	}
 
