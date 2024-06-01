@@ -12,7 +12,7 @@ public class Item {
     private String descricao;
     private double valor;
 
-    private static final String FILE_PATH = "Itens.txt";
+    public static final String FILE_PATH = "Itens.txt";
 
     public Item(int codigo, String descricao, double valor) {
         this.codigo = codigo;
