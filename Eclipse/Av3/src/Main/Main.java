@@ -21,11 +21,15 @@ public class Main {
 		
 		//cat.cadastrar(cat);
 		
-		GenericDAO genericDAO = new GenericDAO();
+		//Funcionario funcionario = new Funcionario("sdgfart", "wetagerg", "gergag", "tgerger", "fgertgae");
+		//funcionario.cadastrar(funcionario);
+
+		Hospede hospede = new Hospede("adsf", "fsa", "afs", "ada", "dsaaa");
+		hospede.cadastrar(hospede);
+		Hospede hospede2 = new Hospede("adsf", "", "", "", "");
+		System.out.println(hospede.consultar(hospede2));
 		
-		//genericDAO.cadastrar(cat);
-		//genericDAO.cadastrar(item);
-		genericDAO.consultar(categoria);
+
 		
 	}
 

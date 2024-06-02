@@ -22,7 +22,7 @@ public class Categoria {
 		this.descricao = descricao;
 		this.valor = valor;
 	}
-	
+		
 	public int getCodigo() {
 		return codigo;
 	}
@@ -58,9 +58,28 @@ public class Categoria {
 		
 		return true;
 	}
-	public Categoria consultar(Categoria C) {
-		return C;
-	}
+
+public Categoria consultar(Categoria categoria) {
+		
+		ArrayList<Categoria> categorias = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+            	Categoria categoriaProcurar = Categoria.fromString(linha);
+                categorias.add(categoriaProcurar);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        for(Categoria categoriaProcurar : categorias) {
+        	if(categoria.getCodigo() == categoriaProcurar.getCodigo()) {
+        		return categoriaProcurar;
+            }
+        }
+        return null;
+    }
 	
 	public ArrayList<Categoria> listar(){
 		ArrayList<Categoria> categorias = new ArrayList<>();
@@ -92,6 +111,8 @@ public class Categoria {
         return new Categoria(codigo, descricao, valor);
     }
 	
-	
+    public String getFilePath() {
+        return FILE_PATH;
+    }
 	
 }

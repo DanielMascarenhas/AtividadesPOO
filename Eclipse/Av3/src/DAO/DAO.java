@@ -8,5 +8,8 @@ public interface DAO<T> {
     boolean editar(T objeto);
     T consultar(T objeto) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchFieldException;
     ArrayList<T> listar(T objeto) throws NoSuchMethodException, InvocationTargetException, NoSuchFieldException, IllegalAccessException, InstantiationException;
+    String getFilePath();
+    T fromString(String linha);
+	Object getDiferencial();
 }
 

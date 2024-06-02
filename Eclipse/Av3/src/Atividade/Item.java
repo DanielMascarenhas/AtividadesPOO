@@ -11,16 +11,19 @@ public class Item {
     private int codigo;
     private String descricao;
     private double valor;
+    
 
     public static final String FILE_PATH = "Itens.txt";
 
     public Item(int codigo, String descricao, double valor) {
-        this.codigo = codigo;
+        this.codigo = codigo;        
         this.descricao = descricao;
         this.valor = valor;
     }
 
-    public int getCodigo() {
+
+
+	public int getCodigo() {
         return codigo;
     }
 
@@ -111,6 +114,10 @@ public class Item {
         String descricao = partes[1];
         double valor = Double.parseDouble(partes[2]);
         return new Item(codigo, descricao, valor);
+    }
+    
+    public String getFilePath() {
+        return FILE_PATH;
     }
     
 }

@@ -32,33 +32,25 @@ public class GenericDAO<T> implements DAO<T>{
 	}
 	
 	public T consultar(T objeto) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, InstantiationException {
-        ArrayList<T> itens = new ArrayList<>();
+		ArrayList<T> itens = new ArrayList<>();
 
-        String filePath = getFilePath(objeto);
-        
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(((DAO<T>) objeto).getFilePath()))) {
             String linha;
-            Method fromStringMethod = type.getMethod("fromString", String.class);
             while ((linha = reader.readLine()) != null) {
-                @SuppressWarnings("unchecked")
-                T itemProcurar = (T) fromStringMethod.invoke(type.getDeclaredConstructor().newInstance(), linha);
+                T itemProcurar = ((DAO<T>) objeto).fromString(linha);
                 itens.add(itemProcurar);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        try {
-            Method getCodigoMethod = type.getMethod("getCodigo");
-            for (T itemProcurar : itens) {
-                Object codigo1 = getCodigoMethod.invoke(objeto);
-                Object codigo2 = getCodigoMethod.invoke(itemProcurar);
-                if (codigo1.equals(codigo2)) {
-                    return itemProcurar;
-                }
+        for (T itemProcurar : itens) {
+            if(((DAO<T>) objeto).getFilePath() == "Itens.txt") {
+            	if (((DAO<T>) objeto).getDiferencial().equals(((DAO<T>) itemProcurar).getDiferencial())) {
+            		return itemProcurar;
+            	}
+            	
             }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
         }
 
         return null;
@@ -90,7 +82,7 @@ public class GenericDAO<T> implements DAO<T>{
 	        field.setAccessible(true);
 	        return (String) field.get(objeto);
 	    }
-	 
+
 	 
 	 
 	 

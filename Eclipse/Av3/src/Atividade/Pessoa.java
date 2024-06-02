@@ -2,10 +2,10 @@ package Atividade;
 
 public abstract class Pessoa {
 
-	private String cpf;
-	private String nome;
-	private String email;
-	private String senha;
+	protected String cpf;
+	protected String nome;
+	protected String email;
+	protected String senha;
 	
 	public Pessoa(String cpf, String nome, String email, String senha) {
 		this.cpf = cpf;

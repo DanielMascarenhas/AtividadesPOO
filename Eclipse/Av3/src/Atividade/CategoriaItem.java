@@ -21,7 +21,7 @@ public class CategoriaItem {
 		this.categoria = categoria;
 		this.quantidade = quantidade;
 	}
-	
+		
 	public Item getItem() {
 		return item;
 	}
@@ -57,11 +57,29 @@ public class CategoriaItem {
 		return true;
 	}
 	
-	public CategoriaItem consultar(CategoriaItem C) {
+	
+public CategoriaItem consultar(CategoriaItem categoriaItem) {
 		
-		
-		return C;
-	}
+		ArrayList<CategoriaItem> categoriasItens = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+            	CategoriaItem categoriasItensProcurar = CategoriaItem.fromString(linha);
+            	categoriasItens.add(categoriasItensProcurar);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+        for(CategoriaItem categoriaItemProcurar : categoriasItens) {
+        	if(categoriaItem.item.getCodigo() == categoriaItemProcurar.item.getCodigo() && categoriaItem.categoria.getCodigo() == categoriaItemProcurar.categoria.getCodigo()) {
+        		return categoriaItemProcurar;
+            }
+        }
+        return null;
+    }
+	
 	
 	
 	public static ArrayList<CategoriaItem> listar() {
@@ -142,6 +160,10 @@ public class CategoriaItem {
         System.out.println("Erro, Categoria nao existe!");
         return null;
         
+    }
+    
+    public String getFilePath() {
+        return FILE_PATH;
     }
     
 }
