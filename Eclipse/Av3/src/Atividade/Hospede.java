@@ -13,8 +13,8 @@ public class Hospede extends Pessoa{
 	
 	private static final String FILE_PATH = "Hospedes.txt";
 
-	public Hospede(String cpf, String nome, String email, String senha, String enderecoCompleto) {
-		super(cpf, nome, email, senha);
+	public Hospede(String cpf, String nome, String email, String enderecoCompleto) {
+		super(cpf, nome, email);
 		this.enderecoCompleto = enderecoCompleto;
 	}
 	
@@ -85,7 +85,7 @@ public class Hospede extends Pessoa{
 	
 	@Override
     public String toString() {
-        return cpf + "," + nome + "," + email + "," + senha + "," + enderecoCompleto;
+        return cpf + "," + nome + "," + email + "," + enderecoCompleto;
     }
 
     public static Hospede fromString(String linha) {
@@ -93,11 +93,10 @@ public class Hospede extends Pessoa{
         String cpf = partes[0];
         String nome = partes[1];
         String email = partes[2];
-        String senha = partes[3];
-        String enderecoCompleto = partes[4];
+        String enderecoCompleto = partes[3];
         
         
-        return new Hospede(cpf,nome,email,senha,enderecoCompleto);
+        return new Hospede(cpf,nome,email,enderecoCompleto);
     }
     
     public String getFilePath() {

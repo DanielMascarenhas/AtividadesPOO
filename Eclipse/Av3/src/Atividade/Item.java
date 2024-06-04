@@ -50,7 +50,7 @@ public class Item {
 
     public boolean cadastrar(Item item) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(this.toString());
+            writer.write(item.toString());
             writer.newLine();
             System.out.println("Informação cadastrada com sucesso!");
         } catch (IOException e) {
@@ -116,8 +116,5 @@ public class Item {
         return new Item(codigo, descricao, valor);
     }
     
-    public String getFilePath() {
-        return FILE_PATH;
-    }
     
 }

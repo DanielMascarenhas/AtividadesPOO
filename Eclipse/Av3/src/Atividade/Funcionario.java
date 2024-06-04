@@ -13,8 +13,8 @@ public class Funcionario extends Pessoa{
 	
 	private static final String FILE_PATH = "Funcionarios.txt";
 
-	public Funcionario(String cpf, String nome, String email, String senha, String setor) {
-		super(cpf, nome, email, senha);
+	public Funcionario(String cpf, String nome, String email, String setor) {
+		super(cpf, nome, email);
 		this.setor = setor;
 	}
 	
@@ -83,7 +83,7 @@ public class Funcionario extends Pessoa{
 	
 	@Override
     public String toString() {
-        return cpf + "," + nome + "," + email + "," + senha + "," + setor;
+        return cpf + "," + nome + "," + email + "," + setor;
     }
 
     public static Funcionario fromString(String linha) {
@@ -91,11 +91,10 @@ public class Funcionario extends Pessoa{
         String cpf = partes[0];
         String nome = partes[1];
         String email = partes[2];
-        String senha = partes[3];
-        String setor = partes[4];
+        String setor = partes[3];
         
         
-        return new Funcionario(cpf,nome,email,senha,setor);
+        return new Funcionario(cpf,nome,email,setor);
     }
 	
 	public String getFilePath() {
