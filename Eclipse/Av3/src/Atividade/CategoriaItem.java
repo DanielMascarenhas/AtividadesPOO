@@ -58,45 +58,36 @@ public class CategoriaItem {
 	}
 	
 	
-public CategoriaItem consultar(CategoriaItem categoriaItem) {
-		
-		ArrayList<CategoriaItem> categoriasItens = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-            	CategoriaItem categoriasItensProcurar = CategoriaItem.fromString(linha);
-            	categoriasItens.add(categoriasItensProcurar);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        for(CategoriaItem categoriaItemProcurar : categoriasItens) {
-        	if(categoriaItem.item.getCodigo() == categoriaItemProcurar.item.getCodigo() && categoriaItem.categoria.getCodigo() == categoriaItemProcurar.categoria.getCodigo()) {
-        		return categoriaItemProcurar;
-            }
-        }
-        return null;
-    }
+	public CategoriaItem consultar(CategoriaItem categoriaItem) {
+			
+			ArrayList<CategoriaItem> categoriasItens = categoriaItem.listar();
 	
-	
-	
-	public static ArrayList<CategoriaItem> listar() {
-	ArrayList<CategoriaItem> categoriasItens = new ArrayList<>();
-
-    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-        String linha;
-        while ((linha = reader.readLine()) != null) {
-        	CategoriaItem categoriaItem = CategoriaItem.fromString(linha);
-            categoriasItens.add(categoriaItem);
-        }
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-
-    return categoriasItens;
+	        for(CategoriaItem categoriaItemProcurar : categoriasItens) {
+	        	if(categoriaItem.item.getCodigo() == categoriaItemProcurar.item.getCodigo() && categoriaItem.categoria.getCodigo() == categoriaItemProcurar.categoria.getCodigo()) {
+	        		return categoriaItemProcurar;
+	            }
+	        }
+	        return null;
 	}
+	
+	
+	
+	public ArrayList<CategoriaItem> listar() {
+		ArrayList<CategoriaItem> categoriasItens = new ArrayList<>();
+	
+	    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+	        String linha;
+	        while ((linha = reader.readLine()) != null) {
+	        	CategoriaItem categoriaItem = CategoriaItem.fromString(linha);
+	            categoriasItens.add(categoriaItem);
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	
+	    return categoriasItens;
+	}
+	
 	
 	@Override
     public String toString() {
@@ -110,56 +101,11 @@ public CategoriaItem consultar(CategoriaItem categoriaItem) {
         int categoria = Integer.parseInt(partes[1]);
         int quantidade = Integer.parseInt(partes[2]);
         
-        ArrayList<Item> itemArray = new ArrayList<>();
+        Item itemPegar = new Item(item, "", 0.0);        
+        Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("Itens.txt"))) {
-            String linha2;
-            while ((linha2 = reader.readLine()) != null) {
-            	Item itemArquivo = Item.fromString(linha2);
-            	itemArray.add(itemArquivo);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        
-        ArrayList<Categoria> categoriaArray = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader("Categorias.txt"))) {
-            String linha3;
-            while ((linha3 = reader.readLine()) != null) {
-            	Categoria categoriaArquivo = Categoria.fromString(linha3);
-                categoriaArray.add(categoriaArquivo);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        
-        Item itemPegar = null;
-        boolean achou = false;
-        
-        for(Item itemAchar : itemArray) {
-        	if( item == itemAchar.getCodigo()) {
-        		itemPegar = itemAchar;
-        		achou = true;
-        	}
-        }
-        
-         if(!achou) {
-        	System.out.println("Erro, Item nao existe!");
-         	return null;
-         }
-    	
-        for(Categoria categoriaAchar : categoriaArray) {
-        	if( categoria == categoriaAchar.getCodigo()) {
-        		return new CategoriaItem(itemPegar, categoriaAchar, quantidade);
-        	}
-        }
-        
-        System.out.println("Erro, Categoria nao existe!");
-        return null;
-        
+        return new CategoriaItem(itemPegar.consultar(itemPegar), categoriaPegar.consultar(categoriaPegar), quantidade);
+  
     }
     
     public String getFilePath() {

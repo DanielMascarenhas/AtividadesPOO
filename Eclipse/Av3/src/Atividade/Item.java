@@ -52,7 +52,7 @@ public class Item {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(item.toString());
             writer.newLine();
-            System.out.println("Informação cadastrada com sucesso!");
+            System.out.println("Item cadastrada com sucesso!");
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -67,17 +67,8 @@ public class Item {
     
 	public Item consultar(Item item) {
 		
-		ArrayList<Item> itens = new ArrayList<>();
+		ArrayList<Item> itens = item.listar();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-                Item itemProcurar = Item.fromString(linha);
-                itens.add(itemProcurar);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         
         for(Item itemProcurar : itens) {
         	if(item.getCodigo() == itemProcurar.getCodigo()) {
@@ -87,7 +78,7 @@ public class Item {
         return null;
     }
     
-    public static ArrayList<Item> listar() {
+    public ArrayList<Item> listar() {
         ArrayList<Item> itens = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {

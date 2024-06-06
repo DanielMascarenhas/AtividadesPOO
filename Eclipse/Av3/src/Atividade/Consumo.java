@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Consumo {
 	private Item item;
@@ -56,13 +55,33 @@ public class Consumo {
 		return true;
 	}
 	
-	public Consumo consultar(Consumo C) {
-		return C;
+	public Consumo consultar(Consumo consumo) {
+		ArrayList<Consumo> consumos = consumo.listar();
+
+
+        
+        for(Consumo consumoProcurar : consumos) {
+        	if(consumoProcurar.item.getCodigo() == consumoProcurar.item.getCodigo() && consumoProcurar.categoria.getCodigo() == consumoProcurar.categoria.getCodigo()) {
+        		return consumoProcurar;
+            }
+        }
+        return null;
 	}
 	
 	public ArrayList<Consumo> listar(){
-		List<Consumo> consumos = new ArrayList<>();
-		return null;
+		ArrayList<Consumo> consumos = new ArrayList<>();
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+	        String linha;
+	        while ((linha = reader.readLine()) != null) {
+	        	Consumo consumo = Consumo.fromString(linha);
+	        	consumos.add(consumo);
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return consumos;
 	}
 	
 	@Override
@@ -81,20 +100,9 @@ public class Consumo {
         
         itemPegar = itemPegar.consultar(itemPegar);
         
-        if(itemPegar == null) {
-        	System.out.println("Erro, Item nao existe!");
-        	return null;
-        }
-        
         Categoria categoriaPegar = new Categoria(categoria,"", 0.0 );
         
         categoriaPegar = categoriaPegar.consultar(categoriaPegar);
-        
-        if(categoriaPegar == null) {
-        	System.out.println("Erro, Categoria nao existe!");
-        	return null;
-        }
-
        
         return new Consumo(itemPegar, categoriaPegar, quantidade);
     }

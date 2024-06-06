@@ -61,18 +61,8 @@ public class Categoria {
 
 public Categoria consultar(Categoria categoria) {
 		
-		ArrayList<Categoria> categorias = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-            	Categoria categoriaProcurar = Categoria.fromString(linha);
-                categorias.add(categoriaProcurar);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
+		ArrayList<Categoria> categorias = categoria.listar();
+		
         for(Categoria categoriaProcurar : categorias) {
         	if(categoria.getCodigo() == categoriaProcurar.getCodigo()) {
         		return categoriaProcurar;

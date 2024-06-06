@@ -10,6 +10,9 @@ public class ConsumoServico {
 	private Reserva reserva;
 	private int quantidadeSolicitada;
 	private Date dataServico;
+	
+	private static final String FILE_PATH = "ConsumoServicos.txt";
+	
 	public ConsumoServico(Servico servico, Categoria categoria, Reserva reserva, int quantidadeSolicitada,
 			Date dataServico) {
 		super();
@@ -66,4 +69,26 @@ public class ConsumoServico {
 		List<ConsumoServico> consumoServicos = new ArrayList<>();
 		return null;
 	}
+	
+	
+	@Override
+    public String toString() {
+        return getServico().getCodigo() + "," + getCategoria().getCodigo() + "," + getReserva().getCodigo() + "," + getQuantidadeSolicitada() + "," + getDataServico();
+    }
+
+    public static CategoriaItem fromString(String linha) {
+    	
+        String[] partes = linha.split(",");
+        int item = Integer.parseInt(partes[0]);
+        int categoria = Integer.parseInt(partes[1]);
+        int quantidade = Integer.parseInt(partes[2]);
+        
+        Item itemPegar = new Item(item, "", 0.0);        
+        Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
+
+        return new CategoriaItem(itemPegar.consultar(itemPegar), categoriaPegar.consultar(categoriaPegar), quantidade);
+  
+    }
+	
+	
 }
