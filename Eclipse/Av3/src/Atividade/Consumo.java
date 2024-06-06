@@ -2,6 +2,7 @@ package Atividade;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -51,7 +52,34 @@ public class Consumo {
         return true;
 	}
 	
-	public boolean editar(Consumo C) {
+	public boolean editar(Consumo consumo) {
+		
+ArrayList<Consumo> consumos = consumo.listar();
+    	
+    	for(var i = 0; i < consumos.size(); i++) {
+    		Consumo consumoProcurar = consumos.get(i);
+        	if(consumo.getItem().getCodigo() == consumoProcurar.getItem().getCodigo() && consumo.getCategoria().getCodigo() == consumoProcurar.getCategoria().getCodigo() ){
+        		consumos.set(i, consumo); 
+            }
+        }
+    	
+    	File arquivo = new File(FILE_PATH);
+    	
+    	 if (arquivo.exists()) {
+             if (arquivo.delete()) {
+                 System.out.println("O arquivo foi excluído com sucesso.");
+             } else {
+                 System.out.println("Falha ao excluir o arquivo.");
+             }
+         } else {
+             System.out.println("O arquivo não existe.");
+         }
+    	 
+    	 
+    	 for(Consumo consumoCadastrar : consumos) {
+    		 consumo.cadastrar(consumoCadastrar);
+         }
+		
 		return true;
 	}
 	

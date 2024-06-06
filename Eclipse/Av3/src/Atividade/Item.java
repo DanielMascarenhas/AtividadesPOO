@@ -2,6 +2,8 @@ package Atividade;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,9 +22,7 @@ public class Item {
         this.descricao = descricao;
         this.valor = valor;
     }
-
-
-
+    
 	public int getCodigo() {
         return codigo;
     }
@@ -47,12 +47,10 @@ public class Item {
         this.valor = valor;
     }
 
-
     public boolean cadastrar(Item item) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(item.toString());
             writer.newLine();
-            System.out.println("Item cadastrada com sucesso!");
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -61,7 +59,33 @@ public class Item {
     }
     
     public boolean editar(Item item) {
-		
+    	ArrayList<Item> itens = item.listar();
+    	
+    	for(var i = 0; i < itens.size(); i++) {
+    		Item itemProcurar = itens.get(i);
+        	if(item.getCodigo() == itemProcurar.getCodigo()) {
+        		itens.set(i, item); 
+            }
+        }
+    	
+    	File arquivo = new File(FILE_PATH);
+    	
+    	 if (arquivo.exists()) {
+             if (arquivo.delete()) {
+                 System.out.println("O arquivo foi excluído com sucesso.");
+             } else {
+                 System.out.println("Falha ao excluir o arquivo.");
+             }
+         } else {
+             System.out.println("O arquivo não existe.");
+         }
+    	 
+    	 
+    	 for(Item itemCadastrar : itens) {
+    		 item.cadastrar(itemCadastrar);
+         }
+    	 
+
 		return true;
 	}
     

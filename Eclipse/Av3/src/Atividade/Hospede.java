@@ -2,6 +2,7 @@ package Atividade;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,7 +40,33 @@ public class Hospede extends Pessoa{
         return true;
 	}
 	
-	public boolean editar(Hospede H) {
+	public boolean editar(Hospede hospede) {
+		
+ArrayList<Hospede> hospedes = hospede.listar();
+    	
+    	for(var i = 0; i < hospedes.size(); i++) {
+    		Hospede funcionarioProcurar = hospedes.get(i);
+        	if(hospede.getCpf() == funcionarioProcurar.getCpf()) {
+        		hospedes.set(i, hospede); 
+            }
+        }
+    	
+    	File arquivo = new File(FILE_PATH);
+    	
+    	 if (arquivo.exists()) {
+             if (arquivo.delete()) {
+                 System.out.println("O arquivo foi excluído com sucesso.");
+             } else {
+                 System.out.println("Falha ao excluir o arquivo.");
+             }
+         } else {
+             System.out.println("O arquivo não existe.");
+         }
+    	 
+    	 
+    	 for(Hospede hospedeCadastrar : hospedes) {
+    		 hospede.cadastrar(hospedeCadastrar);
+         }
 		
 		return true;
 	}

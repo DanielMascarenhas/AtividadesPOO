@@ -2,6 +2,7 @@ package Atividade;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,7 +40,33 @@ public class Funcionario extends Pessoa{
         return true;
 	}
 	
-	public boolean editar(Funcionario F) {
+	public boolean editar(Funcionario funcionario) {
+		
+		ArrayList<Funcionario> funcionarios = funcionario.listar();
+    	
+    	for(var i = 0; i < funcionarios.size(); i++) {
+    		Funcionario funcionarioProcurar = funcionarios.get(i);
+        	if(funcionario.getCpf() == funcionarioProcurar.getCpf()) {
+        		funcionarios.set(i, funcionario); 
+            }
+        }
+    	
+    	File arquivo = new File(FILE_PATH);
+    	
+    	 if (arquivo.exists()) {
+             if (arquivo.delete()) {
+                 System.out.println("O arquivo foi excluído com sucesso.");
+             } else {
+                 System.out.println("Falha ao excluir o arquivo.");
+             }
+         } else {
+             System.out.println("O arquivo não existe.");
+         }
+    	 
+    	 
+    	 for(Funcionario funcionarioCadastrar : funcionarios) {
+    		 funcionario.cadastrar(funcionarioCadastrar);
+         }
 		
 		return true;
 	}

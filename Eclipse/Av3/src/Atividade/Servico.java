@@ -2,6 +2,7 @@ package Atividade;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -52,7 +53,35 @@ public class Servico {
         return true;
 	}
 	
-	public boolean editar(Servico S) {
+	public boolean editar(Servico servico) {
+		
+ArrayList<Servico> servicos = servico.listar();
+    	
+    	for(var i = 0; i < servicos.size(); i++) {
+    		Servico itemProcurar = servicos.get(i);
+        	if(servico.getCodigo() == itemProcurar.getCodigo()) {
+        		servicos.set(i, servico); 
+            }
+        }
+    	
+    	File arquivo = new File(FILE_PATH);
+    	
+    	 if (arquivo.exists()) {
+             if (arquivo.delete()) {
+                 System.out.println("O arquivo foi excluído com sucesso.");
+             } else {
+                 System.out.println("Falha ao excluir o arquivo.");
+             }
+         } else {
+             System.out.println("O arquivo não existe.");
+         }
+    	 
+    	 
+    	 for(Servico servicoCadastrar : servicos) {
+    		 servico.cadastrar(servicoCadastrar);
+         }
+		
+		
 		return true;
 	}
 	

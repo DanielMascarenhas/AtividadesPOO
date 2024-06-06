@@ -2,6 +2,7 @@ package Atividade;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -54,7 +55,33 @@ public class Categoria {
         return true;
     }
 	
-	public boolean editar(Categoria C) {
+	public boolean editar(Categoria categoria) {
+		
+		ArrayList<Categoria> categorias = categoria.listar();
+    	
+    	for(var i = 0; i < categorias.size(); i++) {
+    		Categoria categoriaProcurar = categorias.get(i);
+        	if(categoria.getCodigo() == categoriaProcurar.getCodigo()) {
+        		categorias.set(i, categoria); 
+            }
+        }
+    	
+    	File arquivo = new File(FILE_PATH);
+    	
+    	 if (arquivo.exists()) {
+             if (arquivo.delete()) {
+                 System.out.println("O arquivo foi excluído com sucesso.");
+             } else {
+                 System.out.println("Falha ao excluir o arquivo.");
+             }
+         } else {
+             System.out.println("O arquivo não existe.");
+         }
+    	 
+    	 
+    	 for(Categoria categoriaCadastrar : categorias) {
+    		 categoria.cadastrar(categoriaCadastrar);
+         }
 		
 		return true;
 	}
