@@ -19,9 +19,16 @@ public class Hospede extends Pessoa{
 		this.enderecoCompleto = enderecoCompleto;
 	}
 	
+	public Hospede() {
+		super();
+		this.enderecoCompleto = "";
+	}
+	
 	public String getEnderecoCompleto() {
 		return enderecoCompleto;
 	}
+
+	
 
 	public void setEnderecoCompleto(String enderecoCompleto) {
 		this.enderecoCompleto = enderecoCompleto;
@@ -47,6 +54,7 @@ ArrayList<Hospede> hospedes = hospede.listar();
     	for(var i = 0; i < hospedes.size(); i++) {
     		Hospede funcionarioProcurar = hospedes.get(i);
         	if(hospede.getCpf() == funcionarioProcurar.getCpf()) {
+        		hospedes.remove(i);
         		hospedes.set(i, hospede); 
             }
         }

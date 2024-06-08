@@ -64,6 +64,7 @@ public class Item {
     	for(var i = 0; i < itens.size(); i++) {
     		Item itemProcurar = itens.get(i);
         	if(item.getCodigo() == itemProcurar.getCodigo()) {
+        		itens.remove(i);
         		itens.set(i, item); 
             }
         }

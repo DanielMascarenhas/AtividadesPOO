@@ -61,6 +61,7 @@ public class CategoriaItem {
     	for(var i = 0; i < categoriaItens.size(); i++) {
     		CategoriaItem categoriaItemProcurar = categoriaItens.get(i);
         	if(categoriaItem.getItem().getCodigo() == categoriaItemProcurar.getItem().getCodigo() && categoriaItem.getCategoria().getCodigo() == categoriaItemProcurar.getCategoria().getCodigo() ){
+        		categoriaItens.remove(i);
         		categoriaItens.set(i, categoriaItem); 
             }
         }
@@ -88,11 +89,11 @@ public class CategoriaItem {
 	
 	public CategoriaItem consultar(CategoriaItem categoriaItem) {
 			
-			ArrayList<CategoriaItem> categoriasItens = categoriaItem.listar();
+		ArrayList<CategoriaItem> categoriasItens = categoriaItem.listar();
 	
-	        for(CategoriaItem categoriaItemProcurar : categoriasItens) {
-	        	if(categoriaItem.item.getCodigo() == categoriaItemProcurar.item.getCodigo() && categoriaItem.categoria.getCodigo() == categoriaItemProcurar.categoria.getCodigo()) {
-	        		return categoriaItemProcurar;
+	    for(CategoriaItem categoriaItemProcurar : categoriasItens) {
+	    	if(categoriaItem.item.getCodigo() == categoriaItemProcurar.item.getCodigo() && categoriaItem.categoria.getCodigo() == categoriaItemProcurar.categoria.getCodigo()) {
+	    		return categoriaItemProcurar;
 	            }
 	        }
 	        return null;

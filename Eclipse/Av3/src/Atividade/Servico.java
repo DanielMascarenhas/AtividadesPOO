@@ -60,6 +60,7 @@ ArrayList<Servico> servicos = servico.listar();
     	for(var i = 0; i < servicos.size(); i++) {
     		Servico itemProcurar = servicos.get(i);
         	if(servico.getCodigo() == itemProcurar.getCodigo()) {
+        		servicos.remove(i);
         		servicos.set(i, servico); 
             }
         }

@@ -24,6 +24,13 @@ public class Categoria {
 		this.valor = valor;
 	}
 		
+	public Categoria() {
+		this.codigo = 0;
+		this.descricao = "";
+		this.valor = 0.0;
+	}
+
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -62,6 +69,7 @@ public class Categoria {
     	for(var i = 0; i < categorias.size(); i++) {
     		Categoria categoriaProcurar = categorias.get(i);
         	if(categoria.getCodigo() == categoriaProcurar.getCodigo()) {
+        		categorias.remove(i);
         		categorias.set(i, categoria); 
             }
         }

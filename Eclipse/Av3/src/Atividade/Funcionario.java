@@ -19,6 +19,13 @@ public class Funcionario extends Pessoa{
 		this.setor = setor;
 	}
 	
+	
+	public Funcionario() {
+		super();
+		this.setor = "";
+	}
+
+
 	public String getSetor() {
 		return setor;
 	}
@@ -47,6 +54,7 @@ public class Funcionario extends Pessoa{
     	for(var i = 0; i < funcionarios.size(); i++) {
     		Funcionario funcionarioProcurar = funcionarios.get(i);
         	if(funcionario.getCpf() == funcionarioProcurar.getCpf()) {
+        		funcionarios.remove(i);
         		funcionarios.set(i, funcionario); 
             }
         }
