@@ -1,15 +1,11 @@
 package Atividade;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+
+import DAO.DAO;
 
 public class Reserva {
 
@@ -129,85 +125,6 @@ public class Reserva {
 		this.valorPago = valorPago;
 	}
 	
-	public boolean cadastrar(Reserva reserva) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(reserva.toString());
-            writer.newLine();
-            System.out.println("Funcionario cadastrado com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-	}
-	
-	public boolean editar(Reserva reserva) throws ParseException {
-		ArrayList<Reserva> reservas = reserva.listar();
-    	
-    	for(var i = 0; i < reservas.size(); i++) {
-    		Reserva reservaProcurar = reservas.get(i);
-        	if(reserva.getCodigo() == reservaProcurar.getCodigo()) {
-        		reservas.remove(i);
-        		reservas.set(i, reserva); 
-            }
-        }
-    	
-    	File arquivo = new File(FILE_PATH);
-    	
-    	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
-         } else {
-             System.out.println("O arquivo não existe.");
-         }
-    	 
-    	 
-    	 for(Reserva reservaCadastrar : reservas) {
-    		 reserva.cadastrar(reservaCadastrar);
-         }
-		
-		return true;
-	}
-	
-	public Reserva consultar(Reserva reserva) throws ParseException {
-		ArrayList<Reserva> reservas = new ArrayList<>();
-
-	    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-	        String linha;
-	        while ((linha = reader.readLine()) != null) {
-	        	Reserva reservaProcurar = Reserva.fromString(linha);
-	        	reservas.add(reservaProcurar);
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-
-	    for (Reserva reservaProcurar : reservas) {
-	        if (reserva.getCodigo() == reservaProcurar.getCodigo() ) {
-	            return reservaProcurar;
-	        }
-	    }
-	    return null;
-	}
-	
-	public ArrayList<Reserva> listar() throws ParseException{
-		ArrayList<Reserva> reservas = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-            	Reserva reserva = Reserva.fromString(linha);
-            	reservas.add(reserva);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return reservas;
-	}
 	
 	
 	@Override
@@ -250,8 +167,10 @@ public class Reserva {
         
         Funcionario funcionarioReservaPegar = new Funcionario(funcionarioReserva, "", "", "");
         Funcionario funcionarioFechamentoPegar = new Funcionario(funcionarioFechamento, "", "", "");
+        
+        DAO dao = new DAO();
 
-        return new Reserva(codigo, hospedePegar, quartoPegar, funcionarioReservaPegar, funcionarioFechamentoPegar,
+        return new Reserva(codigo, dao.consultar(hospedePegar), dao.consultar(quartoPegar), dao.consultar(funcionarioReservaPegar), dao.consultar(funcionarioFechamentoPegar),
         		data1, data2, data3, data4, valorReserva, valorPago);
   
     }
@@ -259,6 +178,10 @@ public class Reserva {
     public String dataToString(Date data) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(data);
+    }
+    
+    public String getFilePath() {
+        return FILE_PATH;
     }
 	
 }

@@ -38,10 +38,16 @@ public class Main {
 		ArrayList<ConsumoServico> consumoServicos = consumosServico.listar();
 		
 		
+		DAO dao = new DAO();
 		
-		for(ConsumoServico cs : consumoServicos) {
-			System.out.println(cs);
-		}
+		Categoria categoria = new Categoria();
+		
+		dao.cadastrar(categoria);
+		
+		
+		System.out.println(dao.listar(categoria));
+		
+		
 		
 
 		

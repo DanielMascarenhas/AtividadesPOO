@@ -1,12 +1,5 @@
 package Atividade;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Servico {
 	
@@ -41,79 +34,6 @@ public class Servico {
 		this.valor = valor;
 	}
 	
-	public boolean cadastrar(Servico servico) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(servico.toString());
-            writer.newLine();
-            System.out.println("Serviço cadastrada com sucesso!");
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-	}
-	
-	public boolean editar(Servico servico) {
-		
-ArrayList<Servico> servicos = servico.listar();
-    	
-    	for(var i = 0; i < servicos.size(); i++) {
-    		Servico itemProcurar = servicos.get(i);
-        	if(servico.getCodigo() == itemProcurar.getCodigo()) {
-        		servicos.remove(i);
-        		servicos.set(i, servico); 
-            }
-        }
-    	
-    	File arquivo = new File(FILE_PATH);
-    	
-    	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
-         } else {
-             System.out.println("O arquivo não existe.");
-         }
-    	 
-    	 
-    	 for(Servico servicoCadastrar : servicos) {
-    		 servico.cadastrar(servicoCadastrar);
-         }
-		
-		
-		return true;
-	}
-	
-	public Servico consultar(Servico servico) {
-		ArrayList<Servico> servicos = servico.listar();
-
-        
-        for(Servico servicoProcurar : servicos) {
-        	if(servico.getCodigo() == servicoProcurar.getCodigo()) {
-        		return servicoProcurar;
-            }
-        }
-        return null;
-	}
-	
-	public ArrayList<Servico> listar(){
-		ArrayList<Servico> servicos = new ArrayList<>();
-				
-		try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String linha;
-            while ((linha = reader.readLine()) != null) {
-            	Servico servico = Servico.fromString(linha);
-                servicos.add(servico);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return servicos;
-	}
-	
 	@Override
     public String toString() {
         return codigo + "," + descricao + "," + valor;
@@ -125,6 +45,10 @@ ArrayList<Servico> servicos = servico.listar();
         String descricao = partes[1];
         double valor = Double.parseDouble(partes[2]);
         return new Servico(codigo, descricao, valor);
+    }
+    
+    public String getFilePath() {
+        return FILE_PATH;
     }
 	
 	

@@ -1,15 +1,10 @@
 package Atividade;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import DAO.DAO;
+
 
 public class ConsumoServico {
 	private Servico servico;
@@ -60,82 +55,7 @@ public class ConsumoServico {
 		this.dataServico = dataServico;
 	}
 	
-	public boolean cadastrar(ConsumoServico consumoServico) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(consumoServico.toString());
-            writer.newLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-	}
 	
-	public boolean editar(ConsumoServico consumoServico) throws ParseException {
-		ArrayList<ConsumoServico> consumoServicos = consumoServico.listar();
-    	
-    	for(var i = 0; i < consumoServicos.size(); i++) {
-    		ConsumoServico consumoServicoProcurar = consumoServicos.get(i);
-    		if(consumoServico.servico.getCodigo() == consumoServicoProcurar.servico.getCodigo() && 
-	    			consumoServico.categoria.getCodigo() == consumoServicoProcurar.categoria.getCodigo() && 
-	    					consumoServico.reserva.getCodigo() == consumoServicoProcurar.reserva.getCodigo() ){
-    			consumoServicos.remove(i);
-    			consumoServicos.set(i, consumoServico); 
-            }
-        }
-    	
-    	File arquivo = new File(FILE_PATH);
-    	
-    	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
-         } else {
-             System.out.println("O arquivo não existe.");
-         }
-    	 
-    	 
-    	 for(ConsumoServico consumoServicoCadastrar : consumoServicos) {
-    		 consumoServico.cadastrar(consumoServicoCadastrar);
-         }
-		
-		return true;
-	}
-	
-	
-	public ConsumoServico consultar(ConsumoServico consumoServico) throws ParseException {
-		ArrayList<ConsumoServico> consumoServicos = consumoServico.listar();
-		
-	    for(ConsumoServico consumoServicoProcurar : consumoServicos) {
-	    	if(consumoServico.servico.getCodigo() == consumoServicoProcurar.servico.getCodigo() && 
-	    			consumoServico.categoria.getCodigo() == consumoServicoProcurar.categoria.getCodigo() && 
-	    					consumoServico.reserva.getCodigo() == consumoServicoProcurar.reserva.getCodigo() )
-	    	{
-	    		return consumoServicoProcurar;
-	            }
-	        }
-	        return null;
-	}
-	
-	public ArrayList<ConsumoServico> listar() throws ParseException{
-		ArrayList<ConsumoServico> consumoServicos = new ArrayList<>();
-		
-	    try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-	        String linha;
-	        while ((linha = reader.readLine()) != null) {
-	        	ConsumoServico consumoServico = ConsumoServico.fromString(linha);
-	        	consumoServicos.add(consumoServico);
-	        }
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	
-	    return consumoServicos;
-	}
-	
-
 	
 	@Override
     public String toString() {
@@ -158,9 +78,9 @@ public class ConsumoServico {
         Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
         Reserva reservaPegar = new Reserva(reserva, new Hospede(), new Quarto(), new Funcionario(), new Funcionario(), data, data, data, data, 0.0, 0.0 );
 
+        DAO dao = new DAO();
         
-        
-        return new ConsumoServico(servicoPegar, categoriaPegar, reservaPegar,
+        return new ConsumoServico(dao.consultar(servicoPegar), dao.consultar(categoriaPegar), dao.consultar(reservaPegar),
         		quantidadeSolicitada, data);
   
     }
@@ -168,6 +88,10 @@ public class ConsumoServico {
     public String dataToString(Date data) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(data);
+    }
+    
+    public String getFilePath() {
+        return FILE_PATH;
     }
 	
 }
