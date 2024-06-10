@@ -19,6 +19,17 @@ public class Consumo {
 		this.quantidade = quantidade;
 		this.dataConsumo = dataConsumo;
 	}
+	
+	
+
+	public Consumo() {
+		this.item = new Item();
+		this.categoria = new Categoria();
+		this.quantidade = 0;
+		this.dataConsumo = new Date();
+	}
+
+
 
 	public Item getItem() {
 		return item;

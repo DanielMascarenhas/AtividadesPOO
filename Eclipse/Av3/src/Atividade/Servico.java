@@ -15,6 +15,16 @@ public class Servico {
 		this.valor = valor;
 	}
 	
+	
+	
+	public Servico() {
+		this.codigo = 0;
+		this.descricao = "";
+		this.valor = 0.0;
+	}
+
+
+
 	public int getCodigo() {
 		return codigo;
 	}

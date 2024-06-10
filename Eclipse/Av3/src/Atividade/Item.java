@@ -15,6 +15,16 @@ public class Item {
         this.valor = valor;
     }
     
+    
+    
+	public Item() {
+		this.codigo = 0;        
+        this.descricao = "";
+        this.valor = 0.0;
+	}
+
+
+
 	public int getCodigo() {
         return codigo;
     }

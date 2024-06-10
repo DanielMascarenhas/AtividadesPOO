@@ -17,7 +17,17 @@ public class CategoriaItem {
 		this.categoria = categoria;
 		this.quantidade = quantidade;
 	}
+	
+	
 		
+	public CategoriaItem() {
+		this.item = new Item();
+		this.categoria = new Categoria();
+		this.quantidade = 0;
+	}
+
+
+
 	public Item getItem() {
 		return item;
 	}

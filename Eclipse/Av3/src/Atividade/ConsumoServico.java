@@ -17,13 +17,25 @@ public class ConsumoServico {
 	
 	public ConsumoServico(Servico servico, Categoria categoria, Reserva reserva, int quantidadeSolicitada,
 			Date dataServico) {
-		super();
 		this.servico = servico;
 		this.categoria = categoria;
 		this.reserva = reserva;
 		this.quantidadeSolicitada = quantidadeSolicitada;
 		this.dataServico = dataServico;
 	}
+	
+	
+	
+	public ConsumoServico() {
+		this.servico = new Servico();
+		this.categoria = new Categoria();
+		this.reserva = new Reserva();
+		this.quantidadeSolicitada = 0;
+		this.dataServico = new Date();
+	}
+
+
+
 	public Servico getServico() {
 		return servico;
 	}
