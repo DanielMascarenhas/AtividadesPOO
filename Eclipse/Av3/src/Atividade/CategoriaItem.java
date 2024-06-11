@@ -1,6 +1,9 @@
 package Atividade;
 
 
+import java.io.FileNotFoundException;
+import java.util.NoSuchElementException;
+
 import DAO.DAO;
 
 
@@ -55,20 +58,30 @@ public class CategoriaItem {
         return getItem().getCodigo() + "," + getCategoria().getCodigo() + "," + getQuantidade();
     }
 
-    public static CategoriaItem fromString(String linha) {
+    public static CategoriaItem fromString(String linha) throws FileNotFoundException {
     	
-        String[] partes = linha.split(",");
-        int item = Integer.parseInt(partes[0]);
-        int categoria = Integer.parseInt(partes[1]);
-        int quantidade = Integer.parseInt(partes[2]);
-        
-        Item itemPegar = new Item(item, "", 0.0);        
-        Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
-        
-        DAO dao = new DAO();
-
-        return new CategoriaItem(dao.consultar(itemPegar), dao.consultar(categoriaPegar), quantidade);
-  
+        try {
+        	String[] partes = linha.split(",");
+        	int item = Integer.parseInt(partes[0]);
+        	int categoria = Integer.parseInt(partes[1]);
+        	int quantidade = Integer.parseInt(partes[2]);
+        	
+        	Item itemPegar = new Item(item, "", 0.0);        
+        	Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
+        	
+        	DAO dao = new DAO();
+        	
+        	return new CategoriaItem(dao.consultar(itemPegar), dao.consultar(categoriaPegar), quantidade);
+        	
+        	
+        } catch (NumberFormatException e) {
+		    System.err.println("Erro: as informações fornecidas não são válidas.");
+		} catch (ArrayIndexOutOfBoundsException e) {
+		    System.err.println("Erro: valores não suficientes para a entidade.");
+		} catch (NoSuchElementException e) {
+		    System.err.println("Erro: valores errados a entidade.");
+		} 
+        return null;
     }
     
     public String getFilePath() {

@@ -1,8 +1,11 @@
 package Atividade;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
+
 import DAO.DAO;
 
 public class Consumo {
@@ -66,21 +69,32 @@ public class Consumo {
     }
 	
 
-    public static Consumo fromString(String linha) throws ParseException {
-    	String[] partes = linha.split(",");
-        int item = Integer.parseInt(partes[0]);
-        int categoria = Integer.parseInt(partes[1]);
-        int quantidade = Integer.parseInt(partes[2]);
-        String DataConsumo = partes[2];
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formatter.parse(DataConsumo);
-        
-        Item itemPegar = new Item(item,"", 0.0 );
-        Categoria categoriaPegar = new Categoria(categoria,"", 0.0 );
-        
-        DAO dao = new DAO();
-        return new Consumo(dao.consultar(itemPegar), dao.consultar(categoriaPegar), quantidade, data);
+    public static Consumo fromString(String linha) throws ParseException, FileNotFoundException {
+		try {
+			String[] partes = linha.split(",");
+			int item = Integer.parseInt(partes[0]);
+			int categoria = Integer.parseInt(partes[1]);
+			int quantidade = Integer.parseInt(partes[2]);
+			String DataConsumo = partes[2];
+
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			Date data = formatter.parse(DataConsumo);
+
+			Item itemPegar = new Item(item, "", 0.0);
+			Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
+
+			DAO dao = new DAO();
+			return new Consumo(dao.consultar(itemPegar), dao.consultar(categoriaPegar), quantidade, data);
+
+		} catch (NumberFormatException e) {
+		    System.err.println("Erro: as informações fornecidas não são válidas.");
+		} catch (ArrayIndexOutOfBoundsException e) {
+		    System.err.println("Erro: valores não suficientes para a entidade.");
+		} catch (NoSuchElementException e) {
+		    System.err.println("Erro: valores errados a entidade.");
+		} 
+        return null;
+    
     }
     
     public String getFilePath() {

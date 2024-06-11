@@ -1,5 +1,6 @@
 package Atividade;
 
+import java.util.NoSuchElementException;
 
 public class Categoria {
 	
@@ -47,11 +48,22 @@ public class Categoria {
     }
 
     public static Categoria fromString(String linha) {
-        String[] partes = linha.split(",");
-        int codigo = Integer.parseInt(partes[0]);
-        String descricao = partes[1];
-        double valor = Double.parseDouble(partes[2]);
-        return new Categoria(codigo, descricao, valor);
+    	
+        
+        try {
+        	String[] partes = linha.split(",");
+            int codigo = Integer.parseInt(partes[0]);
+            String descricao = partes[1];
+            double valor = Double.parseDouble(partes[2]);
+            return new Categoria(codigo, descricao, valor);
+        } catch (NumberFormatException e) {
+		    System.err.println("Erro: as informações fornecidas não são válidas.");
+		} catch (ArrayIndexOutOfBoundsException e) {
+		    System.err.println("Erro: valores não suficientes para a entidade.");
+		} catch (NoSuchElementException e) {
+		    System.err.println("Erro: valores errados a entidade.");
+		} 
+        return null;
     }
 	
     public String getFilePath() {

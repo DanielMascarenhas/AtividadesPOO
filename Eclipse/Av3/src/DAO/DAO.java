@@ -1,5 +1,6 @@
 package DAO;
 
+import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -18,19 +19,19 @@ public class DAO {
 		return categoriaDAO.cadastrar(categoria);
 	}
 
-	public boolean editar(Categoria categoria) {
+	public boolean editar(Categoria categoria) throws FileNotFoundException {
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		return categoriaDAO.editar(categoria);
 
 	}
 
-	public Categoria consultar(Categoria categoria) {
+	public Categoria consultar(Categoria categoria) throws FileNotFoundException  {
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		return categoriaDAO.consultar(categoria);
 
 	}
 
-	public ArrayList<Categoria> listar(Categoria categoria) {
+	public ArrayList<Categoria> listar(Categoria categoria) throws FileNotFoundException {
 		CategoriaDAO categoriaDAO = new CategoriaDAO();
 		return categoriaDAO.listar(categoria);
 	}

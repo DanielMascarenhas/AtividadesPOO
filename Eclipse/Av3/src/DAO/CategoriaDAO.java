@@ -3,6 +3,7 @@ package DAO;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,13 +23,21 @@ public class CategoriaDAO implements DAOInterface<Categoria>{
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        }
+        } 
         return true;
     }
 	
-	public boolean editar(Categoria categoria) {
+
+	
+	public boolean editar(Categoria categoria) throws FileNotFoundException {
 		
-		ArrayList<Categoria> categorias = listar(categoria);
+		ArrayList<Categoria> categorias = null;
+		try {
+			categorias = listar(categoria);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	for(var i = 0; i < categorias.size(); i++) {
     		Categoria categoriaProcurar = categorias.get(i);
@@ -58,7 +67,7 @@ public class CategoriaDAO implements DAOInterface<Categoria>{
 		return true;
 	}
 
-	public Categoria consultar(Categoria categoria) {
+	public Categoria consultar(Categoria categoria) throws FileNotFoundException {
 		
 		ArrayList<Categoria> categorias = listar(categoria);
 		
@@ -70,7 +79,7 @@ public class CategoriaDAO implements DAOInterface<Categoria>{
         return null;
     }
 	
-	public ArrayList<Categoria> listar(Categoria categoria2){
+	public ArrayList<Categoria> listar(Categoria categoria2) throws FileNotFoundException{
 		ArrayList<Categoria> categorias = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(categoria2.getFilePath()))) {

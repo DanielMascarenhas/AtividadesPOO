@@ -1,7 +1,12 @@
 package View;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Atividade.*;
@@ -13,7 +18,7 @@ public class Interface {
 				
 		}
 
-		public void chamarInterface() throws ParseException {
+		public void chamarInterface() throws ParseException, FileNotFoundException {
 		    Scanner scanner = new Scanner(System.in);
 		    DAO dao = new DAO();
 		    
@@ -41,11 +46,19 @@ public class Interface {
 	                System.out.print("Digite o nome da categoria: ");
 	                String inputData = scanner.nextLine();
 	                Categoria categoria = Categoria.fromString(inputData);
-	                File arquivo = new File(categoria.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(categoria.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(categoria) == null) {
-		                    dao.cadastrar(categoria);
+	                		
+		                   dao.cadastrar(categoria);
+		                     
 		                } else {
 		                    System.out.println("Categoria já cadastrada.");
 		                }
@@ -57,7 +70,13 @@ public class Interface {
 	                System.out.print("Digite o nome da categoriaItem: ");
 	                String inputData = scanner.nextLine();
 	                CategoriaItem categoriaItem = CategoriaItem.fromString(inputData);
-	                File arquivo = new File(categoriaItem.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(categoriaItem.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(categoriaItem) == null) {
@@ -73,7 +92,13 @@ public class Interface {
 	                System.out.print("Digite a descricão do consumo: ");
 	                String inputData = scanner.nextLine();
 	                Consumo consumo = Consumo.fromString(inputData);
-	                File arquivo = new File(consumo.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(consumo.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(consumo) == null) {
@@ -89,7 +114,13 @@ public class Interface {
 	                System.out.print("Digite a descricão do Consumoservico: ");
 	                String inputData = scanner.nextLine();
 	                ConsumoServico consumoServico = ConsumoServico.fromString(inputData);
-	                File arquivo = new File(consumoServico.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(consumoServico.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(consumoServico) == null) {
@@ -105,7 +136,13 @@ public class Interface {
 	                System.out.print("Digite o nome do funcionário: ");
 	                String inputData = scanner.nextLine();
 	                Funcionario funcionario = Funcionario.fromString(inputData);
-	                File arquivo = new File(funcionario.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(funcionario.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(funcionario) == null) {
@@ -121,7 +158,13 @@ public class Interface {
 	                System.out.print("Digite o nome do hóspede: ");
 	                String inputData = scanner.nextLine();
 	                Hospede hospede = Hospede.fromString(inputData);
-	                File arquivo = new File(hospede.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(hospede.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(hospede) == null) {
@@ -137,8 +180,14 @@ public class Interface {
 	                System.out.print("Digite a descricão do item: ");
 	                String inputData = scanner.nextLine();
 	                Item item = Item.fromString(inputData);
-
-	                File arquivo = new File(item.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(item.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
+	                
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(item) == null) {
@@ -154,7 +203,13 @@ public class Interface {
 	                System.out.print("Digite o número do quarto: ");
 	                String inputData = scanner.nextLine();
 	                Quarto quarto = Quarto.fromString(inputData);
-	                File arquivo = new File(quarto.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(quarto.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(quarto) == null) {
@@ -170,7 +225,13 @@ public class Interface {
 	                System.out.print("Digite a descricão da reserva: ");
 	                String inputData = scanner.nextLine();
 	                Reserva reserva = Reserva.fromString(inputData);
-	                File arquivo = new File(reserva.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(reserva.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(reserva) == null) {
@@ -186,7 +247,13 @@ public class Interface {
 	                System.out.print("Digite a descricão do Servico: ");
 	                String inputData = scanner.nextLine();
 	                Servico servico = Servico.fromString(inputData);
-	                File arquivo = new File(servico.getFilePath());
+	                File arquivo = null;
+	                try{
+	                	arquivo = new File(servico.getFilePath());
+	                }
+	                catch (NullPointerException e) {
+	        			return;
+	        		}
 
 	                if (arquivo.exists()) {
 	                	if (dao.consultar(servico) == null) {

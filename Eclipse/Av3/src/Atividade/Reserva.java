@@ -1,9 +1,9 @@
 package Atividade;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import DAO.DAO;
 
@@ -19,10 +19,10 @@ public class Reserva {
 	private Date dataCheckin;
 	private Date dataCheckout;
 	double valorReserva;
-	double valorPago;	
-	
+	double valorPago;
+
 	private static final String FILE_PATH = "Reservas.txt";
-	
+
 	public Reserva(int codigo, Hospede hospede, Quarto quarto, Funcionario funcionarioReserva,
 			Funcionario funcionarioFechamento, Date dataEntradaReserva, Date dataSaidaReserva, Date dataCheckin,
 			Date dataCheckout, double valorReserva, double valorPago) {
@@ -39,9 +39,7 @@ public class Reserva {
 		this.valorReserva = valorReserva;
 		this.valorPago = valorPago;
 	}
-	
-	
-	
+
 	public Reserva() {
 		this.codigo = 0;
 		this.hospede = new Hospede();
@@ -56,132 +54,156 @@ public class Reserva {
 		this.valorPago = 0.0;
 	}
 
-
-
 	public int getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
+
 	public Hospede getHospede() {
 		return hospede;
 	}
+
 	public void setHospede(Hospede hospede) {
 		this.hospede = hospede;
 	}
+
 	public Quarto getQuarto() {
 		return quarto;
 	}
+
 	public void setQuarto(Quarto quarto) {
 		this.quarto = quarto;
 	}
+
 	public Funcionario getFuncionarioReserva() {
 		return funcionarioReserva;
 	}
+
 	public void setFuncionarioReserva(Funcionario funcionarioReserva) {
 		this.funcionarioReserva = funcionarioReserva;
 	}
+
 	public Funcionario getFuncionarioFechamento() {
 		return funcionarioFechamento;
 	}
+
 	public void setFuncionarioFechamento(Funcionario funcionarioFechamento) {
 		this.funcionarioFechamento = funcionarioFechamento;
 	}
+
 	public Date getDataEntradaReserva() {
 		return dataEntradaReserva;
 	}
+
 	public void setDataEntradaReserva(Date dataEntradaReserva) {
 		this.dataEntradaReserva = dataEntradaReserva;
 	}
+
 	public Date getDataSaidaReserva() {
 		return dataSaidaReserva;
 	}
+
 	public void setDataSaidaReserva(Date dataSaidaReserva) {
 		this.dataSaidaReserva = dataSaidaReserva;
 	}
+
 	public Date getDataCheckin() {
 		return dataCheckin;
 	}
+
 	public void setDataCheckin(Date dataCheckin) {
 		this.dataCheckin = dataCheckin;
 	}
+
 	public Date getDataCheckout() {
 		return dataCheckout;
 	}
+
 	public void setDataCheckout(Date dataCheckout) {
 		this.dataCheckout = dataCheckout;
 	}
+
 	public double getValorReserva() {
 		return valorReserva;
 	}
+
 	public void setValorReserva(double valorReserva) {
 		this.valorReserva = valorReserva;
 	}
+
 	public double getValorPago() {
 		return valorPago;
 	}
+
 	public void setValorPago(double valorPago) {
 		this.valorPago = valorPago;
 	}
-	
-	
-	
-	@Override
-    public String toString() {
-        return getCodigo() + "," + getHospede().getCpf() + "," + getQuarto().getCodigo()
-        		+ "," + getFuncionarioReserva().getCpf() + "," + getFuncionarioFechamento().getCpf()
-        		+ "," + dataToString(dataEntradaReserva) + "," + dataToString(dataSaidaReserva)  
-        		+ "," + dataToString(dataCheckin) + "," + dataToString(dataCheckout)
-        		+ "," + getValorReserva() + "," + getValorPago();
-    }
-	
-	
-    public static Reserva fromString(String linha) throws ParseException {
-    	
-        String[] partes = linha.split(",");
-        int codigo = Integer.parseInt(partes[0]);
-        String hospede = partes[1];
-        int quarto = Integer.parseInt(partes[2]);
-        String funcionarioReserva = partes[3];
-        String funcionarioFechamento = partes[4];
-        String dataEntradaReserva = partes[5];
-        String dataSaidaReserva = partes[6];
-        String dataCheckin = partes[7];
-        String dataCheckout = partes[8];
-        double valorReserva = Double.parseDouble(partes[9]);
-        double valorPago = Double.parseDouble(partes[10]);
-        
-        
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date data1 = formatter.parse(dataEntradaReserva);
-        Date data2 = formatter.parse(dataSaidaReserva);
-        Date data3 = formatter.parse(dataCheckin);
-        Date data4 = formatter.parse(dataCheckout);
-        
-        
-        Hospede hospedePegar = new Hospede(hospede, "", "", ""); 
-        
-        Categoria categoriaParaQuarto = new Categoria( 0, "", 0.0);
-        Quarto quartoPegar = new Quarto(quarto, categoriaParaQuarto, "");
-        
-        Funcionario funcionarioReservaPegar = new Funcionario(funcionarioReserva, "", "", "");
-        Funcionario funcionarioFechamentoPegar = new Funcionario(funcionarioFechamento, "", "", "");
-        
-        DAO dao = new DAO();
 
-        return new Reserva(codigo, dao.consultar(hospedePegar), dao.consultar(quartoPegar), dao.consultar(funcionarioReservaPegar), dao.consultar(funcionarioFechamentoPegar),
-        		data1, data2, data3, data4, valorReserva, valorPago);
-  
-    }
-    
-    public String dataToString(Date data) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return formatter.format(data);
-    }
-    
-    public String getFilePath() {
-        return FILE_PATH;
-    }
-	
+	@Override
+	public String toString() {
+		return getCodigo() + "," + getHospede().getCpf() + "," + getQuarto().getCodigo() + ","
+				+ getFuncionarioReserva().getCpf() + "," + getFuncionarioFechamento().getCpf() + ","
+				+ dataToString(dataEntradaReserva) + "," + dataToString(dataSaidaReserva) + ","
+				+ dataToString(dataCheckin) + "," + dataToString(dataCheckout) + "," + getValorReserva() + ","
+				+ getValorPago();
+	}
+
+	public static Reserva fromString(String linha) throws ParseException {
+
+		try {
+			String[] partes = linha.split(",");
+			int codigo = Integer.parseInt(partes[0]);
+			String hospede = partes[1];
+			int quarto = Integer.parseInt(partes[2]);
+			String funcionarioReserva = partes[3];
+			String funcionarioFechamento = partes[4];
+			String dataEntradaReserva = partes[5];
+			String dataSaidaReserva = partes[6];
+			String dataCheckin = partes[7];
+			String dataCheckout = partes[8];
+			double valorReserva = Double.parseDouble(partes[9]);
+			double valorPago = Double.parseDouble(partes[10]);
+
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			Date data1 = formatter.parse(dataEntradaReserva);
+			Date data2 = formatter.parse(dataSaidaReserva);
+			Date data3 = formatter.parse(dataCheckin);
+			Date data4 = formatter.parse(dataCheckout);
+
+			Hospede hospedePegar = new Hospede(hospede, "", "", "");
+
+			Categoria categoriaParaQuarto = new Categoria(0, "", 0.0);
+			Quarto quartoPegar = new Quarto(quarto, categoriaParaQuarto, "");
+
+			Funcionario funcionarioReservaPegar = new Funcionario(funcionarioReserva, "", "", "");
+			Funcionario funcionarioFechamentoPegar = new Funcionario(funcionarioFechamento, "", "", "");
+
+			DAO dao = new DAO();
+
+			return new Reserva(codigo, dao.consultar(hospedePegar), dao.consultar(quartoPegar),
+					dao.consultar(funcionarioReservaPegar), dao.consultar(funcionarioFechamentoPegar), data1, data2,
+					data3, data4, valorReserva, valorPago);
+
+		} catch (NumberFormatException e) {
+			System.err.println("Erro: as informações fornecidas não são válidas.");
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.err.println("Erro: valores não suficientes para a entidade.");
+		} catch (NoSuchElementException e) {
+			System.err.println("Erro: valores errados a entidade.");
+		}
+		return null;
+	}
+
+	public String dataToString(Date data) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return formatter.format(data);
+	}
+
+	public String getFilePath() {
+		return FILE_PATH;
+	}
+
 }

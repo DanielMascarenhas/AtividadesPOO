@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import Atividade.Funcionario;
 
@@ -21,7 +22,16 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        }
+        }catch (NumberFormatException e) {
+		    System.err.println("Erro: as informações fornecidas não são válidas.");
+		    return false;
+		} catch (ArrayIndexOutOfBoundsException e) {
+		    System.err.println("Erro: valores não suficientes para a entidade.");
+		    return false;
+		} catch (NoSuchElementException e) {
+		    System.err.println("Erro: valores errados a entidade.");
+		    return false;
+		} 
         return true;
 	}
 	
