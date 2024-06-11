@@ -15,9 +15,9 @@ public class CategoriaDAO implements DAOInterface<Categoria>{
 	
 	
 	public boolean cadastrar(Categoria categoria) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(categoria.getFilePath(), true))) {
-            writer.write(categoria.toString());
-            writer.newLine();
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(categoria.getFilePath(), true))) {
+			writer.write(categoria.toString());
+        	writer.newLine();
             System.out.println("Categoria cadastrada com sucesso!");
         } catch (IOException e) {
             e.printStackTrace();

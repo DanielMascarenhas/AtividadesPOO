@@ -29,7 +29,6 @@ public class Interface {
 
 	        if (parts.length < 2) {
 	            System.out.println("Entrada inválida. Por favor, forneca uma acão e uma entidade.");
-	            scanner.close();
 	            return;
 	        }
 
