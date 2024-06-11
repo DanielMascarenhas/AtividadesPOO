@@ -1,0 +1,84 @@
+package DAO;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import Atividade.Servico;
+
+public class ServicoDAO implements DAOInterface<Servico> {
+	public boolean cadastrar(Servico servico) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(servico.getFilePath(), true))) {
+			writer.write(servico.toString());
+			writer.newLine();
+			System.out.println("Serviço cadastrada com sucesso!");
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+
+	public boolean editar(Servico servico) {
+		DAO dao = new DAO();
+		ArrayList<Servico> servicos = dao.listar(servico);
+
+		for (var i = 0; i < servicos.size(); i++) {
+			Servico itemProcurar = servicos.get(i);
+			if (servico.getCodigo() == itemProcurar.getCodigo()) {
+				servicos.remove(i);
+				servicos.set(i, servico);
+			}
+		}
+
+		File arquivo = new File(servico.getFilePath());
+
+		if (arquivo.exists()) {
+			if (arquivo.delete()) {
+				System.out.println("O arquivo foi excluído com sucesso.");
+			} else {
+				System.out.println("Falha ao excluir o arquivo.");
+			}
+		} else {
+			System.out.println("O arquivo não existe.");
+		}
+
+		for (Servico servicoCadastrar : servicos) {
+			dao.cadastrar(servicoCadastrar);
+		}
+
+		return true;
+	}
+
+	public Servico consultar(Servico servico) {
+		DAO dao = new DAO();
+		ArrayList<Servico> servicos = dao.listar(servico);
+
+		for (Servico servicoProcurar : servicos) {
+			if (servico.getCodigo() == servicoProcurar.getCodigo()) {
+				return servicoProcurar;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Servico> listar(Servico servico2) {
+		ArrayList<Servico> servicos = new ArrayList<>();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(servico2.getFilePath()))) {
+			String linha;
+			while ((linha = reader.readLine()) != null) {
+				Servico servico = Servico.fromString(linha);
+				servicos.add(servico);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return servicos;
+	}
+}

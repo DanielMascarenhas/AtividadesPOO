@@ -17,10 +17,10 @@ public class Interface {
 		    Scanner scanner = new Scanner(System.in);
 		    DAO dao = new DAO();
 		    
-		    System.out.println("Digite uma ação seguida de uma entidade (por exemplo, 'Cadastrar Hospede'):");
+		    System.out.println("Digite uma acão seguida de uma entidade (por exemplo, 'Cadastrar Hospede'):");
 		    
 		    String input = scanner.nextLine();
-		        // Faça algo com o input
+		        // Faca algo com o input
 
 
 		    
@@ -28,7 +28,7 @@ public class Interface {
 		    String[] parts = input.split(" ", 2);
 
 	        if (parts.length < 2) {
-	            System.out.println("Entrada inválida. Por favor, forneça uma ação e uma entidade.");
+	            System.out.println("Entrada inválida. Por favor, forneca uma acão e uma entidade.");
 	            scanner.close();
 	            return;
 	        }
@@ -42,7 +42,6 @@ public class Interface {
 	                System.out.print("Digite o nome da categoria: ");
 	                String inputData = scanner.nextLine();
 	                Categoria categoria = Categoria.fromString(inputData);
-	                
 	                File arquivo = new File(categoria.getFilePath());
 
 	                if (arquivo.exists()) {
@@ -72,7 +71,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("consumo")) {
 	                System.out.println("Cadastrando Consumo...");
-	                System.out.print("Digite a descrição do consumo: ");
+	                System.out.print("Digite a descricão do consumo: ");
 	                String inputData = scanner.nextLine();
 	                Consumo consumo = Consumo.fromString(inputData);
 	                File arquivo = new File(consumo.getFilePath());
@@ -86,9 +85,9 @@ public class Interface {
 	                } else {
 	                	dao.cadastrar(consumo);
 	                }
-	            } else if (entity.equals("consumoserviço")) {
-	                System.out.println("Cadastrando ConsumoServiço...");
-	                System.out.print("Digite a descrição do consumoServiço: ");
+	            } else if (entity.equals("consumoservico")) {
+	                System.out.println("Cadastrando Consumoservico...");
+	                System.out.print("Digite a descricão do Consumoservico: ");
 	                String inputData = scanner.nextLine();
 	                ConsumoServico consumoServico = ConsumoServico.fromString(inputData);
 	                File arquivo = new File(consumoServico.getFilePath());
@@ -136,7 +135,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("item")) {
 	                System.out.println("Cadastrando Item...");
-	                System.out.print("Digite a descrição do item: ");
+	                System.out.print("Digite a descricão do item: ");
 	                String inputData = scanner.nextLine();
 	                Item item = Item.fromString(inputData);
 
@@ -169,7 +168,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("reserva")) {
 	                System.out.println("Cadastrando Reserva...");
-	                System.out.print("Digite a descrição da reserva: ");
+	                System.out.print("Digite a descricão da reserva: ");
 	                String inputData = scanner.nextLine();
 	                Reserva reserva = Reserva.fromString(inputData);
 	                File arquivo = new File(reserva.getFilePath());
@@ -183,9 +182,9 @@ public class Interface {
 	                } else {
 	                	dao.cadastrar(reserva);
 	                }
-	            } else if (entity.equals("serviço")) {
-	                System.out.println("Cadastrando Serviço...");
-	                System.out.print("Digite a descrição do serviço: ");
+	            } else if (entity.equals("servico")) {
+	                System.out.println("Cadastrando Servico...");
+	                System.out.print("Digite a descricão do Servico: ");
 	                String inputData = scanner.nextLine();
 	                Servico servico = Servico.fromString(inputData);
 	                File arquivo = new File(servico.getFilePath());
@@ -194,7 +193,7 @@ public class Interface {
 	                	if (dao.consultar(servico) == null) {
 		                    dao.cadastrar(servico);
 		                } else {
-		                    System.out.println("serviço já cadastrado.");
+		                    System.out.println("Servico já cadastrado.");
 		                }
 	                } else {
 	                	dao.cadastrar(servico);
@@ -230,7 +229,7 @@ public class Interface {
 	                
 	            } else if (entity.equals("consumo")) {
 	                System.out.println("Consultando Consumo...");
-	                System.out.print("Digite a descrição do consumo para consultar: ");
+	                System.out.print("Digite a descricão do consumo para consultar: ");
 	                String inputData = scanner.nextLine();
 	                Consumo consumo = Consumo.fromString(inputData);
 	                File arquivo = new File(consumo.getFilePath());
@@ -239,9 +238,9 @@ public class Interface {
 	                } else {
 	                	System.out.println("Nenhum Consumo Cadastrado.");
 	                }
-	            } else if (entity.equals("consumoserviço")) {
-	                System.out.println("Consultando ConsumoServiço...");
-	                System.out.print("Digite a descrição do consumoServiço para consultar: ");
+	            } else if (entity.equals("consumoservico")) {
+	                System.out.println("Consultando Consumoservico...");
+	                System.out.print("Digite a descricão do Consumoservico para consultar: ");
 	                String inputData = scanner.nextLine();
 	                ConsumoServico consumoServico = ConsumoServico.fromString(inputData);
 	                File arquivo = new File(consumoServico.getFilePath());
@@ -274,7 +273,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("item")) {
 	                System.out.println("Consultando Item...");
-	                System.out.print("Digite a descrição do item para consultar: ");
+	                System.out.print("Digite a descricão do item para consultar: ");
 	                String inputData = scanner.nextLine();
 	                Item item = Item.fromString(inputData);
 	                File arquivo = new File(item.getFilePath());
@@ -296,7 +295,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("reserva")) {
 	                System.out.println("Consultando Reserva...");
-	                System.out.print("Digite a descrição da reserva para consultar: ");
+	                System.out.print("Digite a descricão da reserva para consultar: ");
 	                String inputData = scanner.nextLine();
 	                Reserva reserva = Reserva.fromString(inputData);
 	                File arquivo = new File(reserva.getFilePath());
@@ -305,9 +304,9 @@ public class Interface {
 	                } else {
 	                	System.out.println("Nenhuma Reserva Cadastrada.");
 	                }
-	            } else if (entity.equals("serviço")) {
-	                System.out.println("Consultando Serviço...");
-	                System.out.print("Digite a descrição do serviço para consultar: ");
+	            } else if (entity.equals("servico")) {
+	                System.out.println("Consultando Servico...");
+	                System.out.print("Digite a descricão do Servico para consultar: ");
 	                String inputData = scanner.nextLine();
 	                Servico servico = Servico.fromString(inputData);
 	                File arquivo = new File(servico.getFilePath());
@@ -344,7 +343,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("consumo")) {
 	                System.out.println("Editando Consumo...");
-	                System.out.print("Digite a descrição do consumo para editar: ");
+	                System.out.print("Digite a descricão do consumo para editar: ");
 	                String inputData = scanner.nextLine();
 	                Consumo consumo = Consumo.fromString(inputData);
 	                File arquivo = new File(consumo.getFilePath());
@@ -353,9 +352,9 @@ public class Interface {
 	                } else {
 	                	System.out.println("Nenhum Consumo Cadastrado.");
 	                }
-	            } else if (entity.equals("consumoserviço")) {
-	                System.out.println("Editando ConsumoServiço...");
-	                System.out.print("Digite a descrição do consumoServiço para editar: ");
+	            } else if (entity.equals("consumoservico")) {
+	                System.out.println("Editando Consumoservico...");
+	                System.out.print("Digite a descricão do Consumoservico para editar: ");
 	                String inputData = scanner.nextLine();
 	                ConsumoServico consumoServico = ConsumoServico.fromString(inputData);
 	                File arquivo = new File(consumoServico.getFilePath());
@@ -388,7 +387,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("item")) {
 	                System.out.println("Editando Item...");
-	                System.out.print("Digite a descrição do item para editar: ");
+	                System.out.print("Digite a descricão do item para editar: ");
 	                String inputData = scanner.nextLine();
 	                Item item = Item.fromString(inputData);
 	                File arquivo = new File(item.getFilePath());
@@ -410,7 +409,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("reserva")) {
 	                System.out.println("Editando Reserva...");
-	                System.out.print("Digite a descrição da reserva para editar: ");
+	                System.out.print("Digite a descricão da reserva para editar: ");
 	                String inputData = scanner.nextLine();
 	                Reserva reserva = Reserva.fromString(inputData);
 	                File arquivo = new File(reserva.getFilePath());
@@ -419,9 +418,9 @@ public class Interface {
 	                } else {
 	                	System.out.println("Nenhuma Reserva Cadastrada.");
 	                }
-	            } else if (entity.equals("serviço")) {
-	                System.out.println("Editando Serviço...");
-	                System.out.print("Digite a descrição do serviço para editar: ");
+	            } else if (entity.equals("servico")) {
+	                System.out.println("Editando Servico...");
+	                System.out.print("Digite a descricão do Servico para editar: ");
 	                String inputData = scanner.nextLine();
 	                Servico servico = Servico.fromString(inputData);
 	                File arquivo = new File(servico.getFilePath());
@@ -437,10 +436,11 @@ public class Interface {
 	            if (entity.equals("categoria")) {
 	                System.out.println("Listando Categorias...");
 	                Categoria categoria = new Categoria();
-	                File arquivo = new File(categoria.getFilePath());
-	                
+	                File arquivo = new File(categoria.getFilePath()); 
 	                if (arquivo.exists()) {
-	                	dao.listar(new Categoria());
+	                	for(Categoria categoriaPrintar : dao.listar(new Categoria())){
+	                		System.out.println(categoriaPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Servico Cadastrado.");
 	                }                
@@ -450,7 +450,9 @@ public class Interface {
 	                File arquivo = new File(categoriaItem.getFilePath());
 	                
 	                if (arquivo.exists()) {
-	                	dao.listar(new CategoriaItem());
+	                	for(CategoriaItem categoriaItemPrintar : dao.listar(new CategoriaItem())){
+	                		System.out.println(categoriaItemPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhuma CategoriaItem Cadastrada.");
 	                }   
@@ -460,17 +462,21 @@ public class Interface {
 	                File arquivo = new File(consumo.getFilePath());
 	                
 	                if (arquivo.exists()) {
-	                	dao.listar(new Consumo());
+	                	for(Consumo consumoPrintar : dao.listar(new Consumo())){
+	                		System.out.println(consumoPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Consumo Cadastrado.");
 	                } 
-	            } else if (entity.equals("consumoserviço")) {
-	            	System.out.println("Listando Consumosserviços...");
+	            } else if (entity.equals("consumoservico")) {
+	            	System.out.println("Listando Consumoservico...");
 	            	ConsumoServico consumoServico = new ConsumoServico();
 	                File arquivo = new File(consumoServico.getFilePath());
 	                
 	                if (arquivo.exists()) {
-	                	dao.listar(new Consumo());
+	                	for(ConsumoServico consumoServicoPrintar : dao.listar(new ConsumoServico())){
+	                		System.out.println(consumoServicoPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum ConsumoServico Cadastrado.");
 	                } 
@@ -480,7 +486,9 @@ public class Interface {
 	                File arquivo = new File(funcionario.getFilePath());
 	                
 	                if (arquivo.exists()) {
-	                	dao.listar(new Funcionario());
+	                	for(Funcionario funcionarioPrintar : dao.listar(new Funcionario())){
+	                		System.out.println(funcionarioPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum ConsumoServico Cadastrado.");
 	                } 
@@ -489,7 +497,9 @@ public class Interface {
 	                Hospede hospede = new Hospede();
 	                File arquivo = new File(hospede.getFilePath());
 	                if (arquivo.exists()) {
-	                	dao.listar(new Funcionario());
+	                	for(Hospede hospedePrintar : dao.listar(new Hospede())){
+	                		System.out.println(hospedePrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Funcionario Cadastrado.");
 	                } 
@@ -498,7 +508,9 @@ public class Interface {
 	                Item item = new Item();
 	                File arquivo = new File(item.getFilePath());
 	                if (arquivo.exists()) {
-	                	dao.listar(new Item());
+	                	for(Item itemPrintar : dao.listar(new Item())){
+	                		System.out.println(itemPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Item Cadastrado.");
 	                }   
@@ -507,7 +519,9 @@ public class Interface {
 	                Quarto quarto = new Quarto();
 	                File arquivo = new File(quarto.getFilePath());
 	                if (arquivo.exists()) {
-	                	dao.listar(new Quarto());
+	                	for(Quarto quartoPrintar : dao.listar(new Quarto())){
+	                		System.out.println(quartoPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Quarto Cadastrado.");
 	                }   
@@ -516,16 +530,20 @@ public class Interface {
 	                Reserva reserva = new Reserva();
 	                File arquivo = new File(reserva.getFilePath());
 	                if (arquivo.exists()) {
-	                	dao.listar(new Reserva());
+	                	for(Reserva reservaPrintar : dao.listar(new Reserva())){
+	                		System.out.println(reservaPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Quarto Cadastrado.");
 	                }   
-	            } else if (entity.equals("serviço")) {
-	                System.out.println("Listando Serviços...");               
+	            } else if (entity.equals("servico")) {
+	                System.out.println("Listando Servico...");               
 	                Servico servico = new Servico();
 	                File arquivo = new File(servico.getFilePath());
 	                if (arquivo.exists()) {
-	                	dao.listar(new Reserva());
+	                	for(Servico servicoPrintar : dao.listar(new Servico())){
+	                		System.out.println(servicoPrintar);
+	                	}
 	                } else {
 	                	System.out.println("Nenhum Servico Cadastrado.");
 	                }  
@@ -533,7 +551,7 @@ public class Interface {
 	                System.out.println("Entidade desconhecida: " + parts[1]);
 	            }
 	        } else {
-	            System.out.println("Ação desconhecida: " + parts[0]);
+	            System.out.println("Acao desconhecida: " + parts[0]);
 	        }
 	        
 	        
