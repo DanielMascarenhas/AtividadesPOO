@@ -43,21 +43,16 @@ public class CategoriaItemDAO implements DAOInterface<CategoriaItem>{
     	for(var i = 0; i < categoriaItens.size(); i++) {
     		CategoriaItem categoriaItemProcurar = categoriaItens.get(i);
         	if(categoriaItem.getItem().getCodigo() == categoriaItemProcurar.getItem().getCodigo() && categoriaItem.getCategoria().getCodigo() == categoriaItemProcurar.getCategoria().getCodigo() ){
-        		categoriaItens.remove(i);
-        		categoriaItens.set(i, categoriaItem); 
+         		categoriaItens.set(i, categoriaItem); 
             }
         }
     	
     	File arquivo = new File(categoriaItem.getFilePath());
     	
     	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
+    		 arquivo.delete();
          } else {
-             System.out.println("O arquivo não existe.");
+             System.out.println("Nenhuma CategoriaItem Cadastrada.");
          }
     	 
     	 

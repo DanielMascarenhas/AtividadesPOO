@@ -173,7 +173,7 @@ public class Reserva {
 			Date data3 = formatter.parse(dataCheckin);
 			Date data4 = formatter.parse(dataCheckout);
 
-			Hospede hospedePegar = new Hospede(hospede, "", "", "");
+			Hospede hospedePegar = new Hospede(hospede, hospede, "", "");
 
 			Categoria categoriaParaQuarto = new Categoria(0, "", 0.0);
 			Quarto quartoPegar = new Quarto(quarto, categoriaParaQuarto, "");

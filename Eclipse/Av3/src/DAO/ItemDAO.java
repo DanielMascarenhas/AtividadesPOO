@@ -40,7 +40,6 @@ public class ItemDAO implements DAOInterface<Item>{
     	for(var i = 0; i < itens.size(); i++) {
     		Item itemProcurar = itens.get(i);
         	if(item.getCodigo() == itemProcurar.getCodigo()) {
-        		itens.remove(i);
         		itens.set(i, item); 
             }
         }
@@ -48,13 +47,9 @@ public class ItemDAO implements DAOInterface<Item>{
     	File arquivo = new File(item.getFilePath());
     	
     	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
+    		 arquivo.delete();
          } else {
-             System.out.println("O arquivo não existe.");
+             System.out.println("Nenhum Item Cadastrado.");
          }
     	 
     	 

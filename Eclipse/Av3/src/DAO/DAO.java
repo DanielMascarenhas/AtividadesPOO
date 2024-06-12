@@ -122,6 +122,7 @@ public class DAO {
 	public ArrayList<Hospede> listar(Hospede hospede) {
 		HospedeDAO hospedeDAO = new HospedeDAO();
 		return hospedeDAO.listar(hospede);
+		
 	}
 
 	// ---------------------------QUARTO------------------------------------

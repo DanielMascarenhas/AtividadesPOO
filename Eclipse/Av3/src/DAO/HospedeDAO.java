@@ -3,6 +3,7 @@ package DAO;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -42,7 +43,6 @@ public class HospedeDAO implements DAOInterface<Hospede>{
 		for (var i = 0; i < hospedes.size(); i++) {
 			Hospede funcionarioProcurar = hospedes.get(i);
 			if (hospede.getCpf() == funcionarioProcurar.getCpf()) {
-				hospedes.remove(i);
 				hospedes.set(i, hospede);
 			}
 		}
@@ -50,14 +50,10 @@ public class HospedeDAO implements DAOInterface<Hospede>{
 		File arquivo = new File(hospede.getFilePath());
 
 		if (arquivo.exists()) {
-			if (arquivo.delete()) {
-				System.out.println("O arquivo foi excluído com sucesso.");
-			} else {
-				System.out.println("Falha ao excluir o arquivo.");
-			}
-		} else {
-			System.out.println("O arquivo não existe.");
-		}
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhum Hospede Cadastrado.");
+        }
 
 		for (Hospede hospedeCadastrar : hospedes) {
 			dao.cadastrar(hospedeCadastrar);

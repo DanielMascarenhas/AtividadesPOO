@@ -43,7 +43,6 @@ public class ConsumoServicoDAO implements DAOInterface<ConsumoServico>{
 			if (consumoServico.getServico().getCodigo() == consumoServicoProcurar.getServico().getCodigo()
 					&& consumoServico.getCategoria().getCodigo() == consumoServicoProcurar.getCategoria().getCodigo()
 					&& consumoServico.getReserva().getCodigo() == consumoServicoProcurar.getReserva().getCodigo()) {
-				consumoServicos.remove(i);
 				consumoServicos.set(i, consumoServico);
 			}
 		}
@@ -51,14 +50,10 @@ public class ConsumoServicoDAO implements DAOInterface<ConsumoServico>{
 		File arquivo = new File(consumoServico.getFilePath());
 
 		if (arquivo.exists()) {
-			if (arquivo.delete()) {
-				System.out.println("O arquivo foi excluído com sucesso.");
-			} else {
-				System.out.println("Falha ao excluir o arquivo.");
-			}
-		} else {
-			System.out.println("O arquivo não existe.");
-		}
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhum ConsumoServico Cadastrado.");
+        }
 
 		for (ConsumoServico consumoServicoCadastrar : consumoServicos) {
 			dao.cadastrar(consumoServicoCadastrar);

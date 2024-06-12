@@ -42,7 +42,6 @@ public class CategoriaDAO implements DAOInterface<Categoria>{
     	for(var i = 0; i < categorias.size(); i++) {
     		Categoria categoriaProcurar = categorias.get(i);
         	if(categoria.getCodigo() == categoriaProcurar.getCodigo()) {
-        		categorias.remove(i);
         		categorias.set(i, categoria); 
             }
         }
@@ -50,13 +49,9 @@ public class CategoriaDAO implements DAOInterface<Categoria>{
     	File arquivo = new File(categoria.getFilePath());
     	
     	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
+             arquivo.delete();
          } else {
-             System.out.println("O arquivo não existe.");
+             System.out.println("Nenhuma Categoria Cadastrada.");
          }
     	 
     	 

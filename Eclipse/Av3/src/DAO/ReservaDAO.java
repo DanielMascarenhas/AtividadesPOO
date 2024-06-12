@@ -17,7 +17,7 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(reserva.getFilePath(), true))) {
 			writer.write(reserva.toString());
 			writer.newLine();
-			System.out.println("Funcionario cadastrado com sucesso!");
+			System.out.println("Reserva cadastrado com sucesso!");
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
@@ -42,7 +42,6 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 		for (var i = 0; i < reservas.size(); i++) {
 			Reserva reservaProcurar = reservas.get(i);
 			if (reserva.getCodigo() == reservaProcurar.getCodigo()) {
-				reservas.remove(i);
 				reservas.set(i, reserva);
 			}
 		}
@@ -50,14 +49,10 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 		File arquivo = new File(reserva.getFilePath());
 
 		if (arquivo.exists()) {
-			if (arquivo.delete()) {
-				System.out.println("O arquivo foi excluído com sucesso.");
-			} else {
-				System.out.println("Falha ao excluir o arquivo.");
-			}
-		} else {
-			System.out.println("O arquivo não existe.");
-		}
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhuma Reserva Cadastrada.");
+        }
 
 		for (Reserva reservaCadastrar : reservas) {
 			dao.cadastrar(reservaCadastrar);
@@ -66,7 +61,7 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 		return true;
 	}
 
-	public Reserva consultar(Reserva reserva) throws ParseException {
+	public Reserva consultar(Reserva reserva) throws ParseException, NullPointerException{
 		ArrayList<Reserva> reservas = new ArrayList<>();
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(reserva.getFilePath()))) {

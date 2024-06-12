@@ -40,7 +40,6 @@ public class QuartoDAO {
 		for (var i = 0; i < quartos.size(); i++) {
 			Quarto quartoProcurar = quartos.get(i);
 			if (quarto.getCodigo() == quartoProcurar.getCodigo()) {
-				quartos.remove(i);
 				quartos.set(i, quarto);
 			}
 		}
@@ -48,14 +47,10 @@ public class QuartoDAO {
 		File arquivo = new File(quarto.getFilePath());
 
 		if (arquivo.exists()) {
-			if (arquivo.delete()) {
-				System.out.println("O arquivo foi excluído com sucesso.");
-			} else {
-				System.out.println("Falha ao excluir o arquivo.");
-			}
-		} else {
-			System.out.println("O arquivo não existe.");
-		}
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhum Quarto Cadastrado.");
+        }
 
 		for (Quarto quartoCadastrar : quartos) {
 			dao.cadastrar(quartoCadastrar);

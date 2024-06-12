@@ -40,7 +40,6 @@ public class ServicoDAO implements DAOInterface<Servico> {
 		for (var i = 0; i < servicos.size(); i++) {
 			Servico itemProcurar = servicos.get(i);
 			if (servico.getCodigo() == itemProcurar.getCodigo()) {
-				servicos.remove(i);
 				servicos.set(i, servico);
 			}
 		}
@@ -48,14 +47,10 @@ public class ServicoDAO implements DAOInterface<Servico> {
 		File arquivo = new File(servico.getFilePath());
 
 		if (arquivo.exists()) {
-			if (arquivo.delete()) {
-				System.out.println("O arquivo foi excluído com sucesso.");
-			} else {
-				System.out.println("Falha ao excluir o arquivo.");
-			}
-		} else {
-			System.out.println("O arquivo não existe.");
-		}
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhum Serviço Cadastrado.");
+        }
 
 		for (Servico servicoCadastrar : servicos) {
 			dao.cadastrar(servicoCadastrar);

@@ -42,7 +42,6 @@ public class ConsumoDAO implements DAOInterface<Consumo> {
 			Consumo consumoProcurar = consumos.get(i);
 			if (consumo.getItem().getCodigo() == consumoProcurar.getItem().getCodigo()
 					&& consumo.getCategoria().getCodigo() == consumoProcurar.getCategoria().getCodigo()) {
-				consumos.remove(i);
 				consumos.set(i, consumo);
 			}
 		}
@@ -50,14 +49,10 @@ public class ConsumoDAO implements DAOInterface<Consumo> {
 		File arquivo = new File(consumo.getFilePath());
 
 		if (arquivo.exists()) {
-			if (arquivo.delete()) {
-				System.out.println("O arquivo foi excluído com sucesso.");
-			} else {
-				System.out.println("Falha ao excluir o arquivo.");
-			}
-		} else {
-			System.out.println("O arquivo não existe.");
-		}
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhum Consumo Cadastrado.");
+        }
 
 		for (Consumo consumoCadastrar : consumos) {
 			dao.cadastrar(consumoCadastrar);

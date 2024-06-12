@@ -42,22 +42,17 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
     	for(var i = 0; i < funcionarios.size(); i++) {
     		Funcionario funcionarioProcurar = funcionarios.get(i);
         	if(funcionario.getCpf() == funcionarioProcurar.getCpf()) {
-        		funcionarios.remove(i);
         		funcionarios.set(i, funcionario); 
             }
         }
     	
     	File arquivo = new File(funcionario.getFilePath());
     	
-    	 if (arquivo.exists()) {
-             if (arquivo.delete()) {
-                 System.out.println("O arquivo foi excluído com sucesso.");
-             } else {
-                 System.out.println("Falha ao excluir o arquivo.");
-             }
-         } else {
-             System.out.println("O arquivo não existe.");
-         }
+    	if (arquivo.exists()) {
+			arquivo.delete();
+        } else {
+            System.out.println("Nenhum Funcionario Cadastrado.");
+        }
     	 
     	 
     	 for(Funcionario funcionarioCadastrar : funcionarios) {
