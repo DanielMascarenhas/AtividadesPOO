@@ -30,7 +30,9 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 		} catch (NoSuchElementException e) {
 		    System.err.println("Erro: valores errados a entidade.");
 		    return false;
-		} 
+		} catch (NullPointerException e) {
+ 		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+ 		}
 		return true;
 	}
 
@@ -54,8 +56,13 @@ public class ReservaDAO implements DAOInterface<Reserva> {
             System.out.println("Nenhuma Reserva Cadastrada.");
         }
 
-		for (Reserva reservaCadastrar : reservas) {
-			dao.cadastrar(reservaCadastrar);
+		try {
+
+			for (Reserva reservaCadastrar : reservas) {
+				dao.cadastrar(reservaCadastrar);
+			}
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
 		}
 
 		return true;
@@ -74,10 +81,15 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 			e.printStackTrace();
 		}
 
-		for (Reserva reservaProcurar : reservas) {
-			if (reserva.getCodigo() == reservaProcurar.getCodigo()) {
-				return reservaProcurar;
+		try {
+			for (Reserva reservaProcurar : reservas) {
+				if (reserva.getCodigo() == reservaProcurar.getCodigo()) {
+					return reservaProcurar;
+				}
 			}
+
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
 		}
 		return null;
 	}

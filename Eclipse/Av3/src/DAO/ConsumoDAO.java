@@ -30,7 +30,9 @@ public class ConsumoDAO implements DAOInterface<Consumo> {
 		} catch (NoSuchElementException e) {
 		    System.err.println("Erro: valores errados a entidade.");
 		    return false;
-		} 
+		} catch (NullPointerException e) {
+ 		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+ 		}
 		return true;
 	}
 
@@ -53,10 +55,16 @@ public class ConsumoDAO implements DAOInterface<Consumo> {
         } else {
             System.out.println("Nenhum Consumo Cadastrado.");
         }
+		
+		try {
 
-		for (Consumo consumoCadastrar : consumos) {
-			dao.cadastrar(consumoCadastrar);
+			for (Consumo consumoCadastrar : consumos) {
+				dao.cadastrar(consumoCadastrar);
+			}
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
 		}
+
 
 		return true;
 	}
@@ -64,13 +72,19 @@ public class ConsumoDAO implements DAOInterface<Consumo> {
 	public Consumo consultar(Consumo consumo) throws ParseException {
 		DAO dao = new DAO();
 		ArrayList<Consumo> consumos = dao.listar(consumo);
+		
+		try {
 
-		for (Consumo consumoProcurar : consumos) {
-			if (consumoProcurar.getItem().getCodigo() == consumoProcurar.getItem().getCodigo()
-					&& consumoProcurar.getCategoria().getCodigo() == consumoProcurar.getCategoria().getCodigo()) {
-				return consumoProcurar;
+			for (Consumo consumoProcurar : consumos) {
+				if (consumoProcurar.getItem().getCodigo() == consumoProcurar.getItem().getCodigo()
+						&& consumoProcurar.getCategoria().getCodigo() == consumoProcurar.getCategoria().getCodigo()) {
+					return consumoProcurar;
+				}
 			}
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
 		}
+
 		return null;
 	}
 

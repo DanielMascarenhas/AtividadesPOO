@@ -31,7 +31,11 @@ public class CategoriaItemDAO implements DAOInterface<CategoriaItem>{
 		} catch (NoSuchElementException e) {
 		    System.err.println("Erro: valores errados a entidade.");
 		    return false;
-		} 
+		} catch (NullPointerException e) {
+ 		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+ 		}
+        
+        
         return true;
     }
 	
@@ -55,10 +59,16 @@ public class CategoriaItemDAO implements DAOInterface<CategoriaItem>{
              System.out.println("Nenhuma CategoriaItem Cadastrada.");
          }
     	 
-    	 
-    	 for(CategoriaItem categoriaItemCadastrar : categoriaItens) {
-    		 dao.cadastrar(categoriaItemCadastrar);
-         }
+    	 try {
+ 			
+    		 for(CategoriaItem categoriaItemCadastrar : categoriaItens) {
+    			 dao.cadastrar(categoriaItemCadastrar);
+    		 }
+ 			
+ 		}
+ 		catch (NullPointerException e) {
+ 		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+ 		}
 		
 		return true;
 	}
@@ -69,11 +79,17 @@ public class CategoriaItemDAO implements DAOInterface<CategoriaItem>{
 			
 		ArrayList<CategoriaItem> categoriasItens = dao.listar(categoriaItem);
 	
-	    for(CategoriaItem categoriaItemProcurar : categoriasItens) {
-	    	if(categoriaItem.getItem().getCodigo() == categoriaItemProcurar.getItem().getCodigo() && categoriaItem.getCategoria().getCodigo() == categoriaItemProcurar.getCategoria().getCodigo()) {
-	    		return categoriaItemProcurar;
-	            }
-	        }
+		try {
+			
+			for(CategoriaItem categoriaItemProcurar : categoriasItens) {
+				if(categoriaItem.getItem().getCodigo() == categoriaItemProcurar.getItem().getCodigo() && categoriaItem.getCategoria().getCodigo() == categoriaItemProcurar.getCategoria().getCodigo()) {
+					return categoriaItemProcurar;
+				}
+			}
+		}
+		catch (NullPointerException e) {
+		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+		} 
 	        return null;
 	}
 	

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import Atividade.CategoriaItem;
 import Atividade.Quarto;
 
 public class QuartoDAO {
@@ -20,16 +21,18 @@ public class QuartoDAO {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
-		}catch (NumberFormatException e) {
-		    System.err.println("Erro: as informações fornecidas não são válidas.");
-		    return false;
+		} catch (NumberFormatException e) {
+			System.err.println("Erro: as informações fornecidas não são válidas.");
+			return false;
 		} catch (ArrayIndexOutOfBoundsException e) {
-		    System.err.println("Erro: valores não suficientes para a entidade.");
-		    return false;
+			System.err.println("Erro: valores não suficientes para a entidade.");
+			return false;
 		} catch (NoSuchElementException e) {
-		    System.err.println("Erro: valores errados a entidade.");
-		    return false;
-		} 
+			System.err.println("Erro: valores errados a entidade.");
+			return false;
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+		}
 		return true;
 	}
 
@@ -48,13 +51,19 @@ public class QuartoDAO {
 
 		if (arquivo.exists()) {
 			arquivo.delete();
-        } else {
-            System.out.println("Nenhum Quarto Cadastrado.");
-        }
-
-		for (Quarto quartoCadastrar : quartos) {
-			dao.cadastrar(quartoCadastrar);
+		} else {
+			System.out.println("Nenhum Quarto Cadastrado.");
 		}
+
+		try {
+
+			for (Quarto quartoCadastrar : quartos) {
+				dao.cadastrar(quartoCadastrar);
+			}
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+		}
+
 
 		return true;
 	}
@@ -63,11 +72,18 @@ public class QuartoDAO {
 		DAO dao = new DAO();
 		ArrayList<Quarto> quartos = dao.listar(quarto);
 
-		for (Quarto quartoProcurar : quartos) {
-			if (quarto.getCodigo() == quartoProcurar.getCodigo()) {
-				return quartoProcurar;
+		
+		try {
+			for (Quarto quartoProcurar : quartos) {
+				if (quarto.getCodigo() == quartoProcurar.getCodigo()) {
+					return quartoProcurar;
+				}
 			}
+
+		} catch (NullPointerException e) {
+			System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
 		}
+		
 		return null;
 	}
 

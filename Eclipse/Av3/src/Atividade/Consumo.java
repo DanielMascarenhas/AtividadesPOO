@@ -92,7 +92,9 @@ public class Consumo {
 		    System.err.println("Erro: valores não suficientes para a entidade.");
 		} catch (NoSuchElementException e) {
 		    System.err.println("Erro: valores errados a entidade.");
-		} 
+		} catch (NullPointerException e) {
+ 		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+ 		}
         return null;
     
     }
