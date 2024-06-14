@@ -41,8 +41,8 @@ public class HospedeDAO implements DAOInterface<Hospede>{
 		ArrayList<Hospede> hospedes = dao.listar(hospede);
 
 		for (var i = 0; i < hospedes.size(); i++) {
-			Hospede funcionarioProcurar = hospedes.get(i);
-			if (hospede.getCpf() == funcionarioProcurar.getCpf()) {
+			Hospede hospedeProcurar = hospedes.get(i);
+			if (hospede.getCpf().equals(hospedeProcurar.getCpf()) ) {
 				hospedes.set(i, hospede);
 			}
 		}
@@ -76,8 +76,7 @@ public class HospedeDAO implements DAOInterface<Hospede>{
 		}
 
 		for (Hospede hospedeProcurar : hospedes) {
-			if (hospede.getCpf().equals(hospedeProcurar.getCpf())
-					&& hospede.getNome().equals(hospedeProcurar.getNome())) {
+			if (hospede.getCpf().equals(hospedeProcurar.getCpf())) {
 				return hospedeProcurar;
 			}
 		}

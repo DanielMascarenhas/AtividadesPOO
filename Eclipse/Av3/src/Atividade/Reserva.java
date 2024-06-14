@@ -147,8 +147,7 @@ public class Reserva {
 		return getCodigo() + "," + getHospede().getCpf() + "," + getQuarto().getCodigo() + ","
 				+ getFuncionarioReserva().getCpf() + "," + getFuncionarioFechamento().getCpf() + ","
 				+ dataToString(dataEntradaReserva) + "," + dataToString(dataSaidaReserva) + ","
-				+ dataToString(dataCheckin) + "," + dataToString(dataCheckout) + "," + getValorReserva() + ","
-				+ getValorPago();
+				+ dataToString(dataCheckin) + "," + dataToString(dataCheckout) + "," + getValorPago();
 	}
 
 	public static Reserva fromString(String linha) throws ParseException {
@@ -165,7 +164,7 @@ public class Reserva {
 			String dataCheckin = partes[7];
 			String dataCheckout = partes[8];
 			//double valorReserva = Double.parseDouble(partes[9]);
-			double valorPago = Double.parseDouble(partes[10]);
+			double valorPago = Double.parseDouble(partes[9]);
 
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			Date data1 = formatter.parse(dataEntradaReserva);

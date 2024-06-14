@@ -3,6 +3,7 @@ package DAO;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import Atividade.Categoria;
 import Atividade.CategoriaItem;
 import Atividade.Quarto;
 import Atividade.Reserva;
@@ -106,20 +108,22 @@ public class QuartoDAO {
 		return quartos;
 	}
 	
-	public void pagar(int numero) throws ParseException {
+	public void pagar(int numero) throws ParseException, FileNotFoundException {
 		DAO dao = new DAO();
-		Quarto quarto = new Quarto();
-		quarto.setCodigo(numero);
-		if(dao.consultar(quarto).equals(null)) {
+		Categoria categoria = new Categoria(1,"1",1.0);
+		
+		Quarto quarto = new Quarto(numero,dao.consultar(categoria),"Livre");
+		if(dao.consultar(quarto) == null) {
 			System.out.println("Erro: Quarto Não Cadastrado.");
 		}else {
 			
 			dao.editar(quarto);
 			Reserva reserva = new Reserva();
+			reserva.setQuarto(quarto);
 			
 			try{
 				reserva = dao.consultar(reserva);		
-				if(quarto.getStatus() == "Livre") {
+				if(reserva.getQuarto().getStatus().equals("Livre") ||  reserva.getQuarto().getStatus().equals("livre")) {
 					System.out.println("Quarto ja livre");
 					return;
 				}
@@ -130,7 +134,7 @@ public class QuartoDAO {
 				valor = scanner.nextDouble();
 				valor = reserva.getValorPago() + valor;
 				 reserva.setValorPago(valor);
-				if(reserva.getValorReserva() == reserva.getValorPago()) {
+				if(reserva.getValorReserva() <= reserva.getValorPago()) {
 					quarto.setStatus("Livre");
 				}
 				

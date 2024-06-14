@@ -147,7 +147,7 @@ public class DAO {
 		return quartoDAO.listar(quarto);
 	}
 	
-	public void pagar(int numero) throws ParseException {
+	public void pagar(int numero) throws ParseException, FileNotFoundException {
 		QuartoDAO quartoDAO = new QuartoDAO();
 		quartoDAO.pagar(numero);
 	}

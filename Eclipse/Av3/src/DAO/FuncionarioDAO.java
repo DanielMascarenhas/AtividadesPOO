@@ -41,7 +41,7 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
     	
     	for(var i = 0; i < funcionarios.size(); i++) {
     		Funcionario funcionarioProcurar = funcionarios.get(i);
-        	if(funcionario.getCpf() == funcionarioProcurar.getCpf()) {
+        	if(funcionario.getCpf().equals(funcionarioProcurar.getCpf())) {
         		funcionarios.set(i, funcionario); 
             }
         }
@@ -75,7 +75,7 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
 	    }
 
 	    for (Funcionario funcionarioProcurar : funcionarios) {
-	        if (funcionario.getCpf().equals(funcionarioProcurar.getCpf()) && funcionario.getNome().equals(funcionarioProcurar.getNome())) {
+	        if (funcionario.getCpf().equals(funcionarioProcurar.getCpf())) {
 	            return funcionarioProcurar;
 	        }
 	    }

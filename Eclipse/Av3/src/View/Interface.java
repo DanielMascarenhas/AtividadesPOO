@@ -483,7 +483,7 @@ public class Interface {
 	                }
 	            } else if (entity.equals("funcionario")) {
 	                System.out.println("Editando Funcionário...");
-	                System.out.print("Digite o nome do funcionário para editar: ");
+	                System.out.print("Digite os dados do funcionário para editar: ");
 	                String inputData = scanner.nextLine();
 	                Funcionario funcionario = Funcionario.fromString(inputData);
 	                File arquivo = new File(funcionario.getFilePath());

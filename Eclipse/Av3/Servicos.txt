@@ -1,2 +1,3 @@
-1,massagem,40.0
-2,massagem,40.0
+1,massagem,200.0
+2,bebidas caras,2300.0
+3,comidas da boa,200.0
