@@ -275,6 +275,10 @@ public class Interface {
 	                Categoria categoria = Categoria.fromString(inputData);
 	                File arquivo = new File(categoria.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(categoria) == null){
+	                		System.out.println("Categoria Não Cadastrada.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(categoria));
 	                } else {
 	                	System.out.println("Nenhuma Categoria Cadastrada.");
@@ -288,6 +292,10 @@ public class Interface {
 	                
 	                File arquivo = new File(categoriaItem.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(categoriaItem) == null){
+	                		System.out.println("CategoriaItem Não Cadastrada.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(categoriaItem));
 	                } else {
 	                	System.out.println("Nenhuma CategoriaItem Cadastrada.");
@@ -300,6 +308,10 @@ public class Interface {
 	                Consumo consumo = Consumo.fromString(inputData);
 	                File arquivo = new File(consumo.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(consumo) == null){
+	                		System.out.println("consumo Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(consumo));
 	                } else {
 	                	System.out.println("Nenhum Consumo Cadastrado.");
@@ -311,6 +323,10 @@ public class Interface {
 	                ConsumoServico consumoServico = ConsumoServico.fromString(inputData);
 	                File arquivo = new File(consumoServico.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(consumoServico) == null){
+	                		System.out.println("ConsumoServico Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(consumoServico));
 	                } else {
 	                	System.out.println("Nenhum ConsumoServico Cadastrado.");
@@ -322,6 +338,10 @@ public class Interface {
 	                Funcionario funcionario = Funcionario.fromString(inputData);
 	                File arquivo = new File(funcionario.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(funcionario) == null){
+	                		System.out.println("Funcionario Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(funcionario));
 	                } else {
 	                	System.out.println("Nenhum Funcionario Cadastrado.");
@@ -333,6 +353,10 @@ public class Interface {
 	                Hospede hospede = Hospede.fromString(inputData);
 	                File arquivo = new File(hospede.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(hospede) == null){
+	                		System.out.println("Hospede Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(hospede));
 	                } else {
 	                	System.out.println("Nenhum Hospede Cadastrado.");
@@ -344,6 +368,10 @@ public class Interface {
 	                Item item = Item.fromString(inputData);
 	                File arquivo = new File(item.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(item) == null){
+	                		System.out.println("Item Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(item));
 	                } else {
 	                	System.out.println("Nenhum Item Cadastrado.");
@@ -355,6 +383,10 @@ public class Interface {
 	                Quarto quarto = Quarto.fromString(inputData);
 	                File arquivo = new File(quarto.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(quarto) == null){
+	                		System.out.println("Quarto Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(quarto));
 	                } else {
 	                	System.out.println("Nenhum Quarto Cadastrado.");
@@ -366,6 +398,10 @@ public class Interface {
 	                Reserva reserva = Reserva.fromString(inputData);
 	                File arquivo = new File(reserva.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(reserva) == null){
+	                		System.out.println("Reserva Não Cadastrada.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(reserva));
 	                } else {
 	                	System.out.println("Nenhuma Reserva Cadastrada.");
@@ -377,6 +413,10 @@ public class Interface {
 	                Servico servico = Servico.fromString(inputData);
 	                File arquivo = new File(servico.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(servico) == null){
+	                		System.out.println("Servico Não Cadastrado.");
+	                		return;
+	                	}
 	                	System.out.println(dao.consultar(servico));
 	                } else {
 	                	System.out.println("Nenhum Servico Cadastrado.");
@@ -392,6 +432,10 @@ public class Interface {
 	                Categoria categoria = Categoria.fromString(inputData);
 	                File arquivo = new File(categoria.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(categoria) == null){
+	                		System.out.println("Categoria Não Cadastrada.");
+	                		return;
+	                	}
 	                	dao.editar(categoria);
 	                } else {
 	                	System.out.println("Nenhuma Categoria Cadastrada.");
@@ -403,6 +447,10 @@ public class Interface {
 	                CategoriaItem categoriaItem = CategoriaItem.fromString(inputData);
 	                File arquivo = new File(categoriaItem.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(categoriaItem) == null){
+	                		System.out.println("CategoriaItem Não Cadastrada.");
+	                		return;
+	                	}
 	                	dao.editar(categoriaItem);
 	                } else {
 	                	System.out.println("Nenhuma categoriaItem Cadastrada.");
@@ -414,6 +462,10 @@ public class Interface {
 	                Consumo consumo = Consumo.fromString(inputData);
 	                File arquivo = new File(consumo.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(consumo) == null){
+	                		System.out.println("Consumo Não Cadastrado.");
+	                		return;
+	                	}
 	                	dao.editar(consumo);
 	                } else {
 	                	System.out.println("Nenhum Consumo Cadastrado.");
@@ -425,6 +477,10 @@ public class Interface {
 	                ConsumoServico consumoServico = ConsumoServico.fromString(inputData);
 	                File arquivo = new File(consumoServico.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(consumoServico) == null){
+	                		System.out.println("ConsumoServico Não Cadastrado.");
+	                		return;
+	                	}
 	                	dao.editar(consumoServico);
 	                } else {
 	                	System.out.println("Nenhum ConsumoServico Cadastrado.");
@@ -436,6 +492,10 @@ public class Interface {
 	                Funcionario funcionario = Funcionario.fromString(inputData);
 	                File arquivo = new File(funcionario.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(funcionario) == null){
+	                		System.out.println("Funcionario Não Cadastrado.");
+	                		return;
+	                	}
 	                	dao.editar(funcionario);
 	                } else {
 	                	System.out.println("Nenhum Funcionario Cadastrado.");
@@ -447,6 +507,10 @@ public class Interface {
 	                Hospede hospede = Hospede.fromString(inputData);
 	                File arquivo = new File(hospede.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(hospede) == null){
+	                		System.out.println("Hospede Não Cadastrado.");
+	                		return;
+	                	}
 	                	dao.editar(hospede);
 	                } else {
 	                	System.out.println("Nenhum Hospede Cadastrado.");
@@ -458,6 +522,10 @@ public class Interface {
 	                Item item = Item.fromString(inputData);
 	                File arquivo = new File(item.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(item) == null){
+	                		System.out.println("Item Não Cadastrado.");
+	                		return;
+	                	}
 	                	dao.editar(item);
 	                } else {
 	                	System.out.println("Nenhum Item Cadastrado.");
@@ -469,6 +537,10 @@ public class Interface {
 	                Quarto quarto = Quarto.fromString(inputData);
 	                File arquivo = new File(quarto.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(quarto) == null){
+	                		System.out.println("Quarto Não Cadastrado.");
+	                		return;
+	                	}
 	                	dao.editar(quarto);
 	                } else {
 	                	System.out.println("Nenhum Quarto Cadastrado.");
@@ -480,6 +552,10 @@ public class Interface {
 	                Reserva reserva = Reserva.fromString(inputData);
 	                File arquivo = new File(reserva.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(reserva) == null){
+	                		System.out.println("Reserva Não Cadastrada.");
+	                		return;
+	                	}
 	                	dao.editar(reserva);
 	                } else {
 	                	System.out.println("Nenhuma Reserva Cadastrada.");
@@ -491,6 +567,10 @@ public class Interface {
 	                Servico servico = Servico.fromString(inputData);
 	                File arquivo = new File(servico.getFilePath());
 	                if (arquivo.exists()) {
+	                	if(dao.consultar(servico) == null){
+	                		System.out.println("Servico Não Cadastrada.");
+	                		return;
+	                	}
 	                	dao.editar(servico);
 	                } else {
 	                	System.out.println("Nenhum Servico Cadastrado.");

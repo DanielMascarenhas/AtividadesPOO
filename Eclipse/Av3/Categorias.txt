@@ -1,1 +1,3 @@
-1,teste,10.0
+1,luxo padrão,300.0
+2,luxo pobre,150.5
+3,pobre basico,20.0

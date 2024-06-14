@@ -1,3 +1,2 @@
-1,teste,10.0
-3,testre,19.0
-4,re,10.0
+1,banana salgada,10.0
+2,2,2.0

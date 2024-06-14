@@ -25,7 +25,7 @@ public class Reserva {
 
 	public Reserva(int codigo, Hospede hospede, Quarto quarto, Funcionario funcionarioReserva,
 			Funcionario funcionarioFechamento, Date dataEntradaReserva, Date dataSaidaReserva, Date dataCheckin,
-			Date dataCheckout, double valorReserva, double valorPago) {
+			Date dataCheckout) {
 		super();
 		this.codigo = codigo;
 		this.hospede = hospede;
@@ -36,8 +36,8 @@ public class Reserva {
 		this.dataSaidaReserva = dataSaidaReserva;
 		this.dataCheckin = dataCheckin;
 		this.dataCheckout = dataCheckout;
-		this.valorReserva = valorReserva;
-		this.valorPago = valorPago;
+		this.valorReserva = 0;
+		this.valorPago = quarto.getCategoria().getValor();
 	}
 
 	public Reserva() {
@@ -185,7 +185,7 @@ public class Reserva {
 
 			return new Reserva(codigo, dao.consultar(hospedePegar), dao.consultar(quartoPegar),
 					dao.consultar(funcionarioReservaPegar), dao.consultar(funcionarioFechamentoPegar), data1, data2,
-					data3, data4, valorReserva, valorPago);
+					data3, data4);
 
 		} catch (NumberFormatException e) {
 			System.err.println("Erro: as informações fornecidas não são válidas.");

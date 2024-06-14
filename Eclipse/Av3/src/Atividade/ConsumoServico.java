@@ -96,7 +96,7 @@ public class ConsumoServico {
 			Servico servicoPegar = new Servico(servico, "", 0.0);
 			Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
 			Reserva reservaPegar = new Reserva(reserva, new Hospede(), new Quarto(), new Funcionario(),
-					new Funcionario(), data, data, data, data, 0.0, 0.0);
+					new Funcionario(), data, data, data, data);
 
 			DAO dao = new DAO();
 

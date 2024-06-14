@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 import Atividade.CategoriaItem;
 import Atividade.Quarto;
@@ -112,22 +113,31 @@ public class QuartoDAO {
 		if(dao.consultar(quarto).equals(null)) {
 			System.out.println("Erro: Quarto Não Cadastrado.");
 		}else {
-			quarto.setStatus("Livre");
+			
 			dao.editar(quarto);
 			Reserva reserva = new Reserva();
 			
 			try{
-				reserva = dao.consultar(reserva);
-				double valor = reserva.getValorPago() + reserva.getValorReserva();
-				
+				reserva = dao.consultar(reserva);		
+				if(quarto.getStatus() == "Livre") {
+					System.out.println("Quarto ja livre");
+					return;
+				}
+				double valor = reserva.getValorReserva() - reserva.getValorPago();
 				System.out.println("Pagar R$" + valor + ".");
-				reserva.setValorPago(0.0);
-				reserva.setValorReserva(0.0);
-				dao.editar(reserva);
+				Scanner scanner = new Scanner(System.in);
+				System.out.println("valor a pago: ");
+				valor = scanner.nextDouble();
+				valor = reserva.getValorPago() + valor;
+				 reserva.setValorPago(valor);
+				if(reserva.getValorReserva() == reserva.getValorPago()) {
+					quarto.setStatus("Livre");
+				}
+				
 
 			} catch(NullPointerException e) {
 				System.err.println("Sem Reserva para este quarto.");
-				return;
+			
 			}
 				
 			
