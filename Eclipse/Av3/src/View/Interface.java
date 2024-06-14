@@ -616,7 +616,22 @@ public class Interface {
 	            }  else {
 	                System.out.println("Entidade desconhecida: " + parts[1]);
 	            }
-	        } else {
+	        }  else if (action.equals("pagar")) {
+	        	if (entity.equals("quarto")) {
+	        		System.out.print("Digite o numero do Quarto: ");
+	        		int numero = 0;
+	        		try{
+	        			numero = scanner.nextInt();
+	        		} catch (NumberFormatException e) {
+	        		    System.err.println("Erro: Numero de quarto inválido.");
+	        		} 
+	                
+	        		dao.pagar(numero);
+	        		     
+	        		
+	        	}
+	        	
+	        } else{
 	            System.out.println("Acao desconhecida: " + parts[0]);
 	        }
 	        

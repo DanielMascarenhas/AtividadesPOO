@@ -83,7 +83,7 @@ public class ReservaDAO implements DAOInterface<Reserva> {
 
 		try {
 			for (Reserva reservaProcurar : reservas) {
-				if (reserva.getCodigo() == reservaProcurar.getCodigo()) {
+				if (reserva.getCodigo() == reservaProcurar.getCodigo() || reserva.getQuarto() == reservaProcurar.getQuarto()){
 					return reservaProcurar;
 				}
 			}

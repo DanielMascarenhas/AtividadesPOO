@@ -6,11 +6,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import Atividade.CategoriaItem;
 import Atividade.Quarto;
+import Atividade.Reserva;
 
 public class QuartoDAO {
 	public boolean cadastrar(Quarto quarto) {
@@ -101,5 +103,36 @@ public class QuartoDAO {
 		}
 
 		return quartos;
+	}
+	
+	public void pagar(int numero) throws ParseException {
+		DAO dao = new DAO();
+		Quarto quarto = new Quarto();
+		quarto.setCodigo(numero);
+		if(dao.consultar(quarto).equals(null)) {
+			System.out.println("Erro: Quarto Não Cadastrado.");
+		}else {
+			quarto.setStatus("Livre");
+			dao.editar(quarto);
+			Reserva reserva = new Reserva();
+			
+			try{
+				reserva = dao.consultar(reserva);
+				double valor = reserva.getValorPago() + reserva.getValorReserva();
+				
+				System.out.println("Pagar R$" + valor + ".");
+				reserva.setValorPago(0.0);
+				reserva.setValorReserva(0.0);
+				dao.editar(reserva);
+
+			} catch(NullPointerException e) {
+				System.err.println("Sem Reserva para este quarto.");
+				return;
+			}
+				
+			
+			
+		}
+	
 	}
 }

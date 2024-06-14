@@ -1,1 +1,1 @@
-1,1,Livre
+1,0,Livre

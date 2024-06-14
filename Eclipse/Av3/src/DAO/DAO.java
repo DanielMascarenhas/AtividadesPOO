@@ -146,6 +146,11 @@ public class DAO {
 		QuartoDAO quartoDAO = new QuartoDAO();
 		return quartoDAO.listar(quarto);
 	}
+	
+	public void pagar(int numero) throws ParseException {
+		QuartoDAO quartoDAO = new QuartoDAO();
+		quartoDAO.pagar(numero);
+	}
 
 	// ---------------------------Serviço------------------------------------
 	public boolean cadastrar(Servico servico) {
