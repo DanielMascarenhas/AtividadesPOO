@@ -77,7 +77,7 @@ public class HospedeDAO implements DAOInterface<Hospede>{
 
 		for (Hospede hospedeProcurar : hospedes) {
 			if (hospede.getCpf().equals(hospedeProcurar.getCpf())
-					|| hospede.getNome().equals(hospedeProcurar.getNome())) {
+					&& hospede.getNome().equals(hospedeProcurar.getNome())) {
 				return hospedeProcurar;
 			}
 		}

@@ -101,11 +101,7 @@ public class Interface {
 	        		}
 
 	                if (arquivo.exists()) {
-	                	if (dao.consultar(consumo) == null) {
 		                    dao.cadastrar(consumo);
-		                } else {
-		                    System.out.println("Consumo já cadastrado.");
-		                }
 	                } else {
 	                	dao.cadastrar(consumo);
 	                }
@@ -636,7 +632,7 @@ public class Interface {
 	                		System.out.println(funcionarioPrintar);
 	                	}
 	                } else {
-	                	System.out.println("Nenhum ConsumoServico Cadastrado.");
+	                	System.out.println("Nenhum Funcionario Cadastrado.");
 	                } 
 	            } else if (entity.equals("hospede")) {	                
 	                System.out.println("Listando Hóspedes...");

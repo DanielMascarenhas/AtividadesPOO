@@ -75,7 +75,7 @@ public class FuncionarioDAO implements DAOInterface<Funcionario>{
 	    }
 
 	    for (Funcionario funcionarioProcurar : funcionarios) {
-	        if (funcionario.getCpf().equals(funcionarioProcurar.getCpf()) || funcionario.getNome().equals(funcionarioProcurar.getNome())) {
+	        if (funcionario.getCpf().equals(funcionarioProcurar.getCpf()) && funcionario.getNome().equals(funcionarioProcurar.getNome())) {
 	            return funcionarioProcurar;
 	        }
 	    }

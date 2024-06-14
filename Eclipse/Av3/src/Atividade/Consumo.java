@@ -65,21 +65,21 @@ public class Consumo {
 	
 	@Override
     public String toString() {
-        return item.getCodigo() + "," + categoria.getCodigo() + "," + quantidade + "," + getDataConsumo();
+        return item.getCodigo() + "," + categoria.getCodigo() + "," + quantidade + "," + dataToString(getDataConsumo());
     }
 	
 
-    public static Consumo fromString(String linha) throws ParseException, FileNotFoundException {
+    public static Consumo fromString(String linha) throws FileNotFoundException {
 		try {
 			String[] partes = linha.split(",");
 			int item = Integer.parseInt(partes[0]);
 			int categoria = Integer.parseInt(partes[1]);
 			int quantidade = Integer.parseInt(partes[2]);
-			String DataConsumo = partes[2];
-
+			String DataConsumo = partes[3];
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			Date data = formatter.parse(DataConsumo);
-
+			
+			
 			Item itemPegar = new Item(item, "", 0.0);
 			Categoria categoriaPegar = new Categoria(categoria, "", 0.0);
 
@@ -94,6 +94,8 @@ public class Consumo {
 		    System.err.println("Erro: valores errados a entidade.");
 		} catch (NullPointerException e) {
  		    System.err.println("Erro: Alguma das informações não estão cadastradas Coretamente.");
+ 		} catch (ParseException e) {
+ 		    System.err.println("Erro: Data Passada de Forma Incorreta.");
  		}
         return null;
     
@@ -102,5 +104,11 @@ public class Consumo {
     public String getFilePath() {
         return FILE_PATH;
     }
+    
+    public String dataToString(Date data) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return formatter.format(data);
+	}
+    
 	
 }
